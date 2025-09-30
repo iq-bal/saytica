@@ -4,6 +4,7 @@ import ClientScroller from "@/components/ClientScroller";
 import SolutionsGrid from "@/components/SolutionsGrid";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
+import BlogSection from "@/components/sections/BlogSection";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <SolutionsGrid />
       <TestimonialsSection />
       <CaseStudiesSection />
+      <BlogSection />
     </div>
   );
 }
