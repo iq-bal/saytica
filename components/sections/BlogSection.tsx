@@ -60,14 +60,14 @@ export default function BlogSection() {
   const secondaryPosts = blogPosts.filter(post => !post.featured);
 
   return (
-    <section className="py-16 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto bg-gray-50 rounded-xl p-8 md:p-12">
+    <section className="py-16 px-6 md:px-12 bg-background">
+      <div className="max-w-7xl mx-auto bg-muted/30 rounded-xl p-8 md:p-12">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-4">
             Latest Insights & Wellness Tips
           </h2>
-          <p className="text-gray-600 text-center max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-center max-w-2xl mx-auto">
             Discover transformative wellness practices, healing techniques, and mindful living tips 
             from our community of certified practitioners and wellness experts.
           </p>
@@ -75,7 +75,7 @@ export default function BlogSection() {
 
         {/* Featured Blog Card */}
         {featuredPost && (
-          <div className="grid md:grid-cols-2 gap-0 mb-6 rounded-2xl overflow-hidden shadow-lg">
+          <div className="grid md:grid-cols-2 gap-0 mb-6 rounded-2xl overflow-hidden shadow-lg bg-card border border-border">
             {/* Image Card */}
             <div className="relative h-80 md:h-full">
               <Image
@@ -87,12 +87,12 @@ export default function BlogSection() {
             </div>
 
             {/* Content Card */}
-            <div className="bg-green-50 p-6 flex flex-col justify-between h-full">
+            <div className="bg-muted/50 p-6 flex flex-col justify-between h-full">
               <div>
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-2">
                   {featuredPost.title}
                 </h3>
-                <p className="text-gray-700 mt-2 leading-relaxed mb-6">
+                <p className="text-muted-foreground mt-2 leading-relaxed mb-6">
                   {featuredPost.excerpt}
                 </p>
               </div>
@@ -110,10 +110,10 @@ export default function BlogSection() {
                       />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-900">
+                      <p className="text-sm font-medium text-foreground">
                         {featuredPost.author.name}
                       </p>
-                      <p className="text-xs text-gray-600">
+                      <p className="text-xs text-muted-foreground">
                         {featuredPost.author.role}
                       </p>
                     </div>
@@ -121,7 +121,7 @@ export default function BlogSection() {
                 )}
 
                 {/* Tag */}
-                <span className="rounded-full bg-green-100 text-green-800 text-xs px-3 py-1 inline-block font-medium">
+                <span className="rounded-full bg-primary/10 text-primary text-xs px-3 py-1 inline-block font-medium border border-primary/20">
                   {featuredPost.tag}
                 </span>
               </div>
@@ -142,13 +142,13 @@ export default function BlogSection() {
                   className="object-cover"
                 />
                 {/* Tag Overlay */}
-                <span className="absolute bottom-3 left-3 bg-white/90 text-xs px-3 py-1 rounded-full font-medium text-gray-800">
+                <span className="absolute bottom-3 left-3 bg-background/90 backdrop-blur-sm text-xs px-3 py-1 rounded-full font-medium text-foreground border border-border/50">
                   {post.tag}
                 </span>
               </div>
               
               {/* Title */}
-              <h3 className="text-base font-semibold text-gray-900 text-center">
+              <h3 className="text-base font-semibold text-foreground text-center">
                 {post.title}
               </h3>
             </div>
