@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Globe, Users, Award, TrendingUp } from 'lucide-react';
+import { TopLeftDecoration, BottomRightDecoration } from '@/components/ui/corner-decoration';
 
 export default function AboutSection() {
   return (
@@ -9,6 +10,10 @@ export default function AboutSection() {
       className="relative py-20 px-6 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" 
       aria-labelledby="about-heading"
     >
+      {/* Corner Decorations */}
+      <TopLeftDecoration variant="geometric" />
+      <BottomRightDecoration variant="organic" />
+      
       {/* Container with consistent spacing following navbar/footer pattern */}
       <div className="max-w-7xl mx-auto">
         {/* Two-column responsive layout */}

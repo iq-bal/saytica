@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { TopRightDecoration, BottomLeftDecoration } from "@/components/ui/corner-decoration";
 
 const testimonials = [
   {
@@ -42,7 +43,11 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-12 lg:py-16 bg-background">
+    <section className="relative py-12 lg:py-16 bg-background">
+      {/* Corner Decorations */}
+      <TopRightDecoration variant="geometric" />
+      <BottomLeftDecoration variant="organic" />
+      
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">

@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useTheme } from '@/lib/theme';
+import { BottomLeftDecoration, BottomRightDecoration } from '@/components/ui/corner-decoration';
 
 export default function ClientScroller() {
   const { currentTheme, mounted } = useTheme();
@@ -38,6 +39,10 @@ export default function ClientScroller() {
       className="relative py-16 px-6 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" 
       aria-labelledby="clients-heading"
     >
+      {/* Corner Decorations */}
+      <BottomLeftDecoration variant="organic" />
+      <BottomRightDecoration variant="geometric" />
+      
       {/* Container with consistent spacing following navbar/footer pattern */}
       <div className="max-w-7xl mx-auto">
         

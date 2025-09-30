@@ -1,6 +1,7 @@
 "use client";
 
 import { HoverEffect } from "@/components/ui/card-hover-effect";
+import { TopRightDecoration, BottomLeftDecoration } from "@/components/ui/corner-decoration";
 import { 
   Globe, 
   Smartphone, 
@@ -65,7 +66,11 @@ const solutions = [
 
 export default function SolutionsGrid() {
   return (
-    <section className="py-12 lg:py-16 bg-background">
+    <section className="relative py-12 lg:py-16 bg-background">
+      {/* Corner Decorations */}
+      <TopRightDecoration variant="organic" />
+      <BottomLeftDecoration variant="geometric" />
+      
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">

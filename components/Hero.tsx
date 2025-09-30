@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useTheme } from "@/lib/theme";
+import { TopLeftDecoration, TopRightDecoration } from "@/components/ui/corner-decoration";
 // Updated icons for translation/localization theme
 import { ArrowRight, Globe, Languages, FileText, Users, CheckCircle, Award } from "lucide-react";
 
@@ -30,6 +31,10 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-6 py-20" aria-labelledby="hero-heading">
+      {/* Corner Decorations */}
+      <TopLeftDecoration variant="geometric" />
+      <TopRightDecoration variant="organic" />
+      
       {/* Background - Updated to use semantic tokens for proper dark theme support */}
       <div className="absolute inset-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" />
       

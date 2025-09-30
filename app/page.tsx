@@ -3,6 +3,7 @@ import AboutSection from "@/components/AboutSection";
 import ClientScroller from "@/components/ClientScroller";
 import SolutionsGrid from "@/components/SolutionsGrid";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <AboutSection />
       <SolutionsGrid />
       <TestimonialsSection />
+      <CaseStudiesSection />
     </div>
   );
 }
