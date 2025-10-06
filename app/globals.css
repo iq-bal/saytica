@@ -43,6 +43,74 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* Client logo marquee animation */
+/* Modern Logo Strip helpers */
+.logo-strip-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, black 8%, black 92%, transparent 100%);
+}
+
+@keyframes logo-scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes logo-scroll-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.animate-logo-scroll-left {
+  animation: logo-scroll-left 22s linear infinite;
+}
+
+.animate-logo-scroll-right {
+  animation: logo-scroll-right 22s linear infinite;
+}
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.marquee {
+  /* Only clip horizontally so stacked rows remain fully visible */
+  overflow-x: hidden;
+  overflow-y: visible;
+  width: 100%;
+  position: relative;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 2.5rem; /* ~gap-10 */
+  min-width: 200%; /* two copies side-by-side for seamless loop */
+  align-items: center;
+  flex-wrap: nowrap;
+  will-change: transform;
+}
+
+.marquee-left .marquee-track {
+  animation: marquee-left 28s linear infinite;
+}
+
+.marquee-right .marquee-track {
+  animation: marquee-right 28s linear infinite;
+}
+
+.logo-item {
+  height: 3rem; /* h-12 for clearer two-row visibility */
+  width: auto;
+  display: block;
+  object-fit: contain;
+  opacity: 0.75; /* subtle, flat look */
+  filter: grayscale(100%);
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
