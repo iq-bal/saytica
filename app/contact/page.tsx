@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 export default function ContactPage() {
   return (
     <section className="relative bg-background text-foreground py-16">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="w-full">
         {/* Header */}
         <div className="mb-10 text-center md:text-left">
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Contact Us</h1>
@@ -126,7 +126,7 @@ export default function ContactPage() {
               </form>
             </CardContent>
           </Card>
-        </div>
+      </div>
       </div>
     </section>
   );

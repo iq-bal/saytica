@@ -32,7 +32,10 @@ export default function RootLayout({
       >
         <Navbar />
         <main className="flex-1">
-          {children}
+          {/* Align page content with Navbar container without altering page-level styles */}
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            {children}
+          </div>
         </main>
         <Footer />
       </body>

@@ -67,7 +67,7 @@ export default function CareersPage() {
         <div className="absolute right-[-10%] top-10 h-72 w-72 rounded-full bg-gradient-to-br from-[#FFD1C1] to-[#FFE8E2] blur-3xl opacity-60" />
       </div>
 
-      <section className="max-w-5xl mx-auto px-4 md:px-6 pt-10 md:pt-14">
+      <section className="max-w-5xl pt-10 md:pt-14">
         {/* Badge */}
         <Badge variant="outline" className="rounded-full px-3 py-1 text-xs md:text-sm">
           We're hiring!
@@ -111,7 +111,7 @@ export default function CareersPage() {
       </section>
 
       {/* Job listings */}
-      <section className="max-w-5xl mx-auto px-4 md:px-6 pb-12 md:pb-16">
+      <section className="max-w-5xl pb-12 md:pb-16">
         <div className="mt-8 md:mt-10 border-t divide-y">
           {filteredJobs.map((job, idx) => (
             <motion.div

@@ -32,7 +32,7 @@ export default function FeaturedBlogs({ featuredBlogs }: FeaturedBlogsProps) {
 
   return (
     <section className="relative bg-background text-foreground pb-16">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="w-full">
         <motion.div
           variants={staggerContainer}
           initial="hidden"

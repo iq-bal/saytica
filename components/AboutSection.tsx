@@ -7,15 +7,15 @@ import { TopLeftDecoration, BottomRightDecoration } from '@/components/ui/corner
 export default function AboutSection() {
   return (
     <section 
-      className="relative py-20 px-6 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" 
+      className="relative py-20 px-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" 
       aria-labelledby="about-heading"
     >
       {/* Corner Decorations */}
       <TopLeftDecoration variant="geometric" />
       <BottomRightDecoration variant="organic" />
       
-      {/* Container with consistent spacing following navbar/footer pattern */}
-      <div className="max-w-7xl mx-auto">
+      {/* Container aligned with global layout container (no extra centering/padding) */}
+      <div className="w-full">
         {/* Two-column responsive layout */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           

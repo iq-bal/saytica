@@ -15,7 +15,7 @@ export default function BlogHeroSection({ post }: { post: BlogPost }) {
   return (
     <section className="relative pb-16 pt-24 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
       <div className="absolute inset-0 bg-black/70 z-0"></div>
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+      <div className="relative z-10 w-full">
         <motion.div
           initial="hidden"
           animate="visible"

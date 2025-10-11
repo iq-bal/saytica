@@ -8,7 +8,7 @@ export default function AboutPage() {
   return (
     <section className="bg-background text-foreground">
       
-      <main className="max-w-6xl mx-auto px-4 md:px-6 py-16 space-y-16">
+      <main className="w-full py-16 space-y-16">
         {/* Hero Section */}
         <section id="about" className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           {/* Left */}

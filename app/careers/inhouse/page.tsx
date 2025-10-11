@@ -64,7 +64,7 @@ export default function InhouseCareersPage() {
       <div className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-1/2">
         <div className="absolute right-[-10%] top-10 h-72 w-72 rounded-full bg-gradient-to-br from-[#FFD1C1] to-[#FFE8E2] blur-3xl opacity-60" />
       </div>
-      <section className="max-w-5xl mx-auto px-4 md:px-6 pt-10 md:pt-14">
+      <section className="max-w-5xl pt-10 md:pt-14">
         <Badge variant="outline" className="rounded-full px-3 py-1 text-xs md:text-sm">We're hiring!</Badge>
         <h1 className="mt-4 text-5xl md:text-6xl font-bold tracking-tight">Be part of our mission</h1>
         <p className="mt-3 text-gray-600 leading-relaxed text-sm md:text-base lg:text-lg max-w-2xl">
@@ -86,7 +86,7 @@ export default function InhouseCareersPage() {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-4 md:px-6 pb-12 md:pb-16">
+      <section className="max-w-5xl pb-12 md:pb-16">
         <div className="mt-8 md:mt-10 border-t divide-y">
           {filteredJobs.map((job, idx) => (
             <motion.div key={job.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: idx * 0.06 }} className="py-6 md:py-7">

@@ -30,7 +30,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 py-20" aria-labelledby="hero-heading">
+    <section className="relative min-h-screen flex items-center justify-center px-0 py-20" aria-labelledby="hero-heading">
       {/* Corner Decorations */}
       <TopLeftDecoration variant="geometric" />
       <TopRightDecoration variant="organic" />
@@ -38,7 +38,7 @@ export default function Hero() {
       {/* Background - Updated to use semantic tokens for proper dark theme support */}
       <div className="absolute inset-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" />
       
-      <div className="container mx-auto max-w-7xl relative z-10">
+      <div className="relative z-10 w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Content */}
           <div className="space-y-8 text-center lg:text-left">
