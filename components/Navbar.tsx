@@ -4,12 +4,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Sheet,
   SheetContent,
   SheetHeader,
@@ -30,7 +24,6 @@ import {
   X,
   Sun,
   Moon,
-  ChevronDown,
   ChevronRight,
   Globe,
   Briefcase,
@@ -51,20 +44,10 @@ const solutionsItems = [
   { title: "Voiceover & Video Localization", href: "/solutions/voiceover" },
 ];
 
-// Languages data (sample)
-const languagesData = [
-  { code: "en", name: "English", flag: "🇺🇸" },
-  { code: "es", name: "Spanish", flag: "🇪🇸" },
-  { code: "fr", name: "French", flag: "🇫🇷" },
-  { code: "de", name: "German", flag: "🇩🇪" },
-  { code: "it", name: "Italian", flag: "🇮🇹" },
-  { code: "pt", name: "Portuguese", flag: "🇵🇹" },
-  { code: "ru", name: "Russian", flag: "🇷🇺" },
-  { code: "zh", name: "Chinese", flag: "🇨🇳" },
-  { code: "ja", name: "Japanese", flag: "🇯🇵" },
-  { code: "ko", name: "Korean", flag: "🇰🇷" },
-  { code: "ar", name: "Arabic", flag: "🇸🇦" },
-  { code: "hi", name: "Hindi", flag: "🇮🇳" },
+// Career menu items
+const careerItems = [
+  { title: "Freelance", href: "/careers/freelance" },
+  { title: "Inhouse", href: "/careers/inhouse" },
 ];
 
 // Mobile accordion component
@@ -240,43 +223,27 @@ export default function Navbar() {
 
                 
 
-                {/* Languages Dropdown */}
+                {/* Career Dropdown */}
                 <NavigationMenuItem>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-10 px-4 py-2"
-                        aria-label="Select language"
-                      >
-                        <Globe className="mr-2 h-4 w-4" />
-                        {languagesData.find((lang) => lang.code === selectedLanguage)?.flag}{" "}
-                        {languagesData.find((lang) => lang.code === selectedLanguage)?.name}
-                        <ChevronDown className="ml-2 h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      align="end"
-                      className="w-56 max-h-80 overflow-y-auto"
-                    >
-                      <div className="grid grid-cols-1 gap-1 p-1">
-                        {languagesData.map((language) => (
-                          <DropdownMenuItem
-                            key={language.code}
-                            onClick={() => setSelectedLanguage(language.code)}
-                            className="flex items-center gap-3 cursor-pointer"
-                          >
-                            <span className="text-lg">{language.flag}</span>
-                            <span className="flex-1">{language.name}</span>
-                            {selectedLanguage === language.code && (
-                              <div className="h-2 w-2 rounded-full bg-primary" />
-                            )}
-                          </DropdownMenuItem>
-                        ))}
-                      </div>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  <NavigationMenuTrigger className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                    <Briefcase className="mr-2 h-4 w-4" />
+                    Career
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="grid w-[400px] grid-cols-1 gap-3 p-6">
+                      {careerItems.map((item) => (
+                        <Link
+                          key={item.title}
+                          href={item.href}
+                          className="group grid h-auto w-full items-center justify-start gap-1 rounded-md bg-background p-4 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                        >
+                          <div className="text-sm font-medium leading-none group-hover:underline">
+                            {item.title}
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </NavigationMenuContent>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
@@ -369,26 +336,18 @@ export default function Navbar() {
                           ))}
                         </MobileAccordion>
 
-                        {/* Mobile Languages Accordion */}
-                        <MobileAccordion title="Languages" icon={Globe}>
-                          <div className="grid grid-cols-1 gap-1">
-                            {languagesData.map((language) => (
-                              <button
-                                key={language.code}
-                                onClick={() => {
-                                  setSelectedLanguage(language.code);
-                                  setIsMobileMenuOpen(false);
-                                }}
-                                className="flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-left w-full"
-                              >
-                                <span className="text-lg">{language.flag}</span>
-                                <span className="flex-1">{language.name}</span>
-                                {selectedLanguage === language.code && (
-                                  <div className="h-2 w-2 rounded-full bg-primary" />
-                                )}
-                              </button>
-                            ))}
-                          </div>
+                        {/* Mobile Career Accordion */}
+                        <MobileAccordion title="Career" icon={Briefcase}>
+                          {careerItems.map((item) => (
+                            <Link
+                              key={item.title}
+                              href={item.href}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="block rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                            >
+                              {item.title}
+                            </Link>
+                          ))}
                         </MobileAccordion>
                       </div>
                     </div>
