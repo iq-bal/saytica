@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ArrowRight, CheckCircle, Database, Headphones, Layers, ShieldCheck, Globe, Search, Filter } from "lucide-react"
+import { ArrowRight, Database, Layers, Globe, Search, Filter } from "lucide-react"
 
 type Dataset = {
   id: string
@@ -24,8 +24,8 @@ type Dataset = {
   audioPreview?: string
 }
 
-// Dummy dataset generator to populate listings
-const makeDatasets = (count = 48): Dataset[] => {
+// Dummy dataset generator to populate listings (reused from audio page)
+const makeDatasets = (count = 72): Dataset[] => {
   const languages = [
     "English",
     "Mandarin Chinese",
@@ -59,21 +59,8 @@ const makeDatasets = (count = 48): Dataset[] => {
     "Turkey",
     "India",
   ]
-  const topics = [
-    "Work",
-    "Daily Life",
-    "Education & Healthcare",
-    "Science & Technology",
-    "Smart Devices",
-    "Travel",
-  ]
-  const devices = [
-    "Smart Phone",
-    "High Fidelity Mic",
-    "Bluetooth headset",
-    "Telephony",
-    "Microphone",
-  ]
+  const topics = ["Work", "Daily Life", "Education & Healthcare", "Science & Technology", "Smart Devices", "Travel"]
+  const devices = ["Smart Phone", "High Fidelity Mic", "Bluetooth headset", "Telephony", "Microphone"]
   const envs = ["Indoor", "Outdoor", "In-Vehicle Environments", "Public Space", "Residential"]
   const styles: Dataset["speechStyle"][] = ["Conversational Speech", "Read Speech", "Noise"]
 
@@ -210,11 +197,11 @@ const DEVICES = [
   "Bluetooth headset",
 ] as const
 
-export default function AudioDatasetsPage() {
+export default function AllDatasetsPage() {
   const [allDatasets] = useState<Dataset[]>(() => makeDatasets(72))
   const [query, setQuery] = useState("")
   const [activeIndustry, setActiveIndustry] = useState<string | null>(null)
-  const [activeTypeToggle, setActiveTypeToggle] = useState<(typeof DATA_TYPES)[number]>("Audio Datasets")
+  const [activeTypeToggle, setActiveTypeToggle] = useState<(typeof DATA_TYPES)[number]>("All Datasets")
   const [activeLanguage, setActiveLanguage] = useState<string | null>(null)
   const [activeApplication, setActiveApplication] = useState<string | null>(null)
   const [activeType, setActiveType] = useState<(typeof TYPES)[number] | null>(null)
@@ -229,7 +216,7 @@ export default function AudioDatasetsPage() {
 
   const filtered = useMemo(() => {
     let list = allDatasets
-    // Data type toggle is informational here; we’re focused on audio datasets
+    // Data type toggle is informational here; page lists all datasets
     if (activeIndustry) list = list.filter((d) => d.industry === activeIndustry)
     if (activeLanguage) list = list.filter((d) => d.language === activeLanguage)
     if (activeApplication) list = list.filter((d) => d.application === activeApplication)
@@ -347,11 +334,11 @@ export default function AudioDatasetsPage() {
       {/* Page hero */}
       <section className="pt-10 md:pt-14">
         <Badge variant="outline" className="rounded-full px-3 py-1 text-xs md:text-sm inline-flex items-center gap-2">
-          <Headphones className="h-3 w-3" /> Audio Datasets
+          <Layers className="h-3 w-3" /> All Datasets
         </Badge>
-        <h1 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">Explore Speech & Audio Corpora</h1>
+        <h1 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">Explore All MDT Corpora</h1>
         <p className="mt-3 text-muted-foreground leading-relaxed text-sm md:text-base lg:text-lg max-w-2xl">
-          Filter high-quality multilingual audio datasets across industries, applications, and regions.
+          Browse multilingual datasets across audio, text, image, and more.
         </p>
 
         {/* Data type toggle */}
@@ -362,7 +349,7 @@ export default function AudioDatasetsPage() {
         </div>
       </section>
 
-      {/* Search */}
+      {/* Search + Filter toggle */}
       <section className="mt-6">
         <div className="flex items-center gap-2 max-w-xl">
           <div className="relative flex-1">
@@ -393,86 +380,86 @@ export default function AudioDatasetsPage() {
 
       {/* Filters */}
       {showFilters && (
-      <section id="filters-section" className="mt-8 md:mt-10 space-y-6">
-        {/* Primary filters */}
-        <FilterGroup
-          label="Industry"
-          items={INDUSTRIES}
-          activeValue={activeIndustry}
-          onToggle={(v) => setActiveIndustry(v)}
-          limit={8}
-        />
+        <section id="filters-section" className="mt-8 md:mt-10 space-y-6">
+          {/* Primary filters */}
+          <FilterGroup
+            label="Industry"
+            items={INDUSTRIES}
+            activeValue={activeIndustry}
+            onToggle={(v) => setActiveIndustry(v)}
+            limit={8}
+          />
 
-        <FilterGroup
-          label="Language"
-          items={LANGUAGES}
-          activeValue={activeLanguage}
-          onToggle={(v) => setActiveLanguage(v)}
-          limit={12}
-        />
+          <FilterGroup
+            label="Language"
+            items={LANGUAGES}
+            activeValue={activeLanguage}
+            onToggle={(v) => setActiveLanguage(v)}
+            limit={12}
+          />
 
-        <FilterGroup
-          label="Application / Use-Case"
-          items={APPLICATIONS}
-          activeValue={activeApplication}
-          onToggle={(v) => setActiveApplication(v)}
-          limit={8}
-        />
+          <FilterGroup
+            label="Application / Use-Case"
+            items={APPLICATIONS}
+            activeValue={activeApplication}
+            onToggle={(v) => setActiveApplication(v)}
+            limit={8}
+          />
 
-        {/* Secondary filters collapsed by default */}
-        <details className="mt-2">
-          <summary className="cursor-pointer text-sm text-muted-foreground">More Filters</summary>
-          <div className="mt-4 space-y-6">
-            <FilterGroup
-              label="Type"
-              items={TYPES}
-              activeValue={activeType ?? null}
-              onToggle={(v) => setActiveType(v as (typeof TYPES)[number] | null)}
-              limit={6}
-            />
+          {/* Secondary filters collapsed by default */}
+          <details className="mt-2">
+            <summary className="cursor-pointer text-sm text-muted-foreground">More Filters</summary>
+            <div className="mt-4 space-y-6">
+              <FilterGroup
+                label="Type"
+                items={TYPES}
+                activeValue={activeType ?? null}
+                onToggle={(v) => setActiveType(v as (typeof TYPES)[number] | null)}
+                limit={6}
+              />
 
-            <FilterGroup
-              label="Region / Geography"
-              items={REGIONS}
-              activeValue={activeRegion}
-              onToggle={(v) => setActiveRegion(v)}
-              limit={10}
-            />
+              <FilterGroup
+                label="Region / Geography"
+                items={REGIONS}
+                activeValue={activeRegion}
+                onToggle={(v) => setActiveRegion(v)}
+                limit={10}
+              />
 
-            <FilterGroup
-              label="Topic"
-              items={TOPICS}
-              activeValue={activeTopic}
-              onToggle={(v) => setActiveTopic(v)}
-              limit={10}
-            />
+              <FilterGroup
+                label="Topic"
+                items={TOPICS}
+                activeValue={activeTopic}
+                onToggle={(v) => setActiveTopic(v)}
+                limit={10}
+              />
 
-            <FilterGroup
-              label="Speech Style"
-              items={STYLES}
-              activeValue={activeStyle ?? null}
-              onToggle={(v) => setActiveStyle(v as (typeof STYLES)[number] | null)}
-              limit={6}
-            />
+              <FilterGroup
+                label="Speech Style"
+                items={STYLES}
+                activeValue={activeStyle ?? null}
+                onToggle={(v) => setActiveStyle(v as (typeof STYLES)[number] | null)}
+                limit={6}
+              />
 
-            <FilterGroup
-              label="Recording Environment"
-              items={ENVIRONMENTS}
-              activeValue={activeEnvironment}
-              onToggle={(v) => setActiveEnvironment(v)}
-              limit={8}
-            />
+              <FilterGroup
+                label="Recording Environment"
+                items={ENVIRONMENTS}
+                activeValue={activeEnvironment}
+                onToggle={(v) => setActiveEnvironment(v)}
+                limit={8}
+              />
 
-            <FilterGroup
-              label="Recording Device"
-              items={DEVICES}
-              activeValue={activeDevice}
-              onToggle={(v) => setActiveDevice(v)}
-              limit={8}
-            />
-          </div>
-        </details>
-      </section>
+              <FilterGroup
+                label="Recording Device"
+                items={DEVICES}
+                activeValue={activeDevice}
+                onToggle={(v) => setActiveDevice(v)}
+                limit={8}
+              />
+            </div>
+          </details>
+        </section>
       )}
 
       {/* Counts */}
@@ -523,67 +510,69 @@ export default function AudioDatasetsPage() {
 
         {/* Pagination */}
         <div className="mt-8 flex items-center justify-center gap-2">
-          {Array.from({ length: totalPages }).map((_, i) => {
-            const page = i + 1
-            const active = page === currentPage
-            return (
-              <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={active ? "rounded-full bg-neutral-900 text-white px-3 py-1 text-sm" : "rounded-full px-3 py-1 text-sm border"}
-              >
-                {page}
-              </button>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* Why MD Datasets */}
-      <section className="mt-12">
-        <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">Why MD Datasets</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="rounded-xl border border-border">
-            <CardContent className="p-6 space-y-2">
-              <ShieldCheck className="h-5 w-5" />
-              <div className="font-semibold">Full Compliance</div>
-              <p className="text-sm text-muted-foreground">ISO/IEC 27001 & ISO/IEC 27701:2019</p>
-            </CardContent>
-          </Card>
-          <Card className="rounded-xl border border-border">
-            <CardContent className="p-6 space-y-2">
-              <Layers className="h-5 w-5" />
-              <div className="font-semibold">Multiple Dimensions</div>
-              <p className="text-sm text-muted-foreground">Audio, text, image, video</p>
-            </CardContent>
-          </Card>
-          <Card className="rounded-xl border border-border">
-            <CardContent className="p-6 space-y-2">
-              <Headphones className="h-5 w-5" />
-              <div className="font-semibold">Extensive Scope</div>
-              <p className="text-sm text-muted-foreground">Conversational, scripted, spontaneous speech</p>
-            </CardContent>
-          </Card>
-          <Card className="rounded-xl border border-border">
-            <CardContent className="p-6 space-y-2">
-              <CheckCircle className="h-5 w-5" />
-              <div className="font-semibold">High Accuracy</div>
-              <p className="text-sm text-muted-foreground">Quality assurance built in</p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* CTA / Contact */}
-      <section className="m-10 flex flex-col sm:flex-row items-center justify-between gap-4 border-t p-6">
-        <div className="text-sm text-muted-foreground">
-          No related data? <Link href="/contact" className="hover:underline">Contact us</Link>
-        </div>
-        <Link href="/contact" className="inline-flex">
-          <Button className="rounded-full px-5" aria-label="Request quote for datasets">
-            Request quote <ArrowRight className="ml-2 h-4 w-4" />
+          <Button
+            variant="outline"
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+          >
+            Previous
           </Button>
-        </Link>
+          <div className="text-sm text-muted-foreground">
+            Page <span className="text-foreground font-medium">{currentPage}</span> of {totalPages}
+          </div>
+          <Button
+            variant="outline"
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+          >
+            Next
+          </Button>
+        </div>
+      </section>
+
+      {/* Value proposition */}
+      <section className="mt-14 md:mt-18">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="rounded-xl border">
+            <CardHeader>
+              <CardTitle className="text-lg">Comprehensive Coverage</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">
+              Cross-domain corpora spanning languages, regions, and applications.
+            </CardContent>
+          </Card>
+          <Card className="rounded-xl border">
+            <CardHeader>
+              <CardTitle className="text-lg">Quality & Compliance</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">
+              Curated datasets with robust consent, security, and review flows.
+            </CardContent>
+          </Card>
+          <Card className="rounded-xl border">
+            <CardHeader>
+              <CardTitle className="text-lg">Scale & Reliability</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">
+              Proven collection pipelines and validation for enterprise workloads.
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="m-12 md:mt-16">
+        <div className="rounded-xl border p-6 md:p-8 bg-muted/40">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div>
+              <h2 className="text-xl md:text-2xl font-semibold">Need a custom corpus or procurement help?</h2>
+              <p className="mt-1 text-sm text-muted-foreground">Reach out to our solutions team to source or tailor datasets.</p>
+            </div>
+            <Button asChild>
+              <Link href="/contact">Contact Us</Link>
+            </Button>
+          </div>
+        </div>
       </section>
     </div>
   )

@@ -1,10 +1,7 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { useTheme } from "@/lib/theme";
 import { 
   Twitter, 
   Linkedin, 
@@ -21,8 +18,6 @@ import {
  * Responsive: 4-col desktop, 2-col tablet, stacked mobile
  */
 export default function Footer() {
-  const { theme } = useTheme();
-
   // Social media links with icons and accessibility labels
   const socialLinks = [
     {
@@ -54,7 +49,7 @@ export default function Footer() {
   // Quick navigation links
   const quickLinks = [
     { name: "About", href: "/about" },
-    { name: "Language Solutions", href: "/solutions" },
+    { name: "Careers", href: "/careers" },
     { name: "Our Work", href: "/work" },
     { name: "Blog", href: "/blog" }
   ];
@@ -62,7 +57,8 @@ export default function Footer() {
   // Company legal links
   const companyLinks = [
     { name: "Privacy Policy", href: "/privacy" },
-    { name: "Terms & Conditions", href: "/terms" }
+    { name: "Terms & Conditions", href: "/terms" },
+    { name: "FAQs", href: "/faqs" }
   ];
 
   return (

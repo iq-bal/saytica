@@ -133,6 +133,7 @@ export default function Navbar() {
   ];
 
   const dataSolutionsItems = [
+    { title: "All Datasets", href: "/data/all-datasets" },
     { title: "Audio Datasets", href: "/data/audio-datasets" },
     { title: "Text Datasets", href: "/data/text-datasets" },
     { title: "Image Datasets", href: "/data/image-datasets" },
