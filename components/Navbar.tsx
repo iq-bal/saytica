@@ -36,6 +36,7 @@ import {
   Briefcase,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Database } from "lucide-react";
 
 // Solutions data
 const solutionsItems = [
@@ -144,9 +145,15 @@ export default function Navbar() {
   const navItems = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Technology", href: "/technology" },
     { name: "Blog", href: "/blog" },
     { name: "Contact Us", href: "/contact" },
+  ];
+
+  const dataSolutionsItems = [
+    { title: "Audio Datasets", href: "/data/audio-datasets" },
+    { title: "Text Datasets", href: "/data/text-datasets" },
+    { title: "Image Datasets", href: "/data/image-datasets" },
+    { title: "Lex", href: "/data/lex" },
   ];
 
   return (
@@ -172,7 +179,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:block">
-            <NavigationMenu>
+            <NavigationMenu viewport={false}>
               <NavigationMenuList className="flex items-center space-x-1">
                 {navItems.map((item) => (
                   <NavigationMenuItem key={item.name}>
@@ -183,6 +190,30 @@ export default function Navbar() {
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 ))}
+
+                {/* Data solutions Dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                    <Database className="mr-2 h-4 w-4" />
+                    Data solutions
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    {/* Match Solutions dropdown sizing and grid for consistent alignment */}
+                    <div className="grid w-[600px] grid-cols-2 gap-3 p-6">
+                      {dataSolutionsItems.map((item) => (
+                        <Link
+                          key={item.title}
+                          href={item.href}
+                          className="group grid h-auto w-full items-center justify-start gap-1 rounded-md bg-background p-4 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                        >
+                          <div className="text-sm font-medium leading-none group-hover:underline">
+                            {item.title}
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
 
                 {/* Solutions Dropdown */}
                 <NavigationMenuItem>
@@ -206,6 +237,8 @@ export default function Navbar() {
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
+
+                
 
                 {/* Languages Dropdown */}
                 <NavigationMenuItem>
@@ -311,6 +344,20 @@ export default function Navbar() {
                         {/* Mobile Solutions Accordion */}
                         <MobileAccordion title="Solutions" icon={Briefcase}>
                           {solutionsItems.map((item) => (
+                            <Link
+                              key={item.title}
+                              href={item.href}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="block rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                            >
+                              {item.title}
+                            </Link>
+                          ))}
+                        </MobileAccordion>
+
+                        {/* Mobile Data solutions Accordion */}
+                        <MobileAccordion title="Data solutions" icon={Database}>
+                          {dataSolutionsItems.map((item) => (
                             <Link
                               key={item.title}
                               href={item.href}

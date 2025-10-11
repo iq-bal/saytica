@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Play, Star, ArrowRightCircle, User } from "lucide-react";
-import ClientScroller from "@/components/ClientScroller";
 
 export default function AboutPage() {
   return (
@@ -49,65 +48,6 @@ export default function AboutPage() {
               <div className="aspect-square w-full bg-muted rounded-xl" />
             </CardContent>
           </Card>
-        </section>
-
-        {/* Modern Logo Strip (logos only, styled similar to ClientScroller) */}
-        <section aria-label="Client logos" className="space-y-4">
-          {/* Row 1: scroll left */}
-          <div className="relative overflow-hidden bg-muted/20 rounded-2xl border border-border group">
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-            <ul className="marquee-track flex items-center gap-x-12 py-6 animate-logo-scroll-left group-hover:[animation-play-state:paused]">
-              {[
-                "/client_logo_dark/airbnb.png",
-                "/client_logo_dark/envato.png",
-                "/client_logo_dark/slack.png",
-                "/client_logo_dark/zoom.png",
-              ].map((src, i) => (
-                <li key={`logo-row1-a-${i}`} className="flex items-center">
-                  <img src={src} alt="Client logo" className="logo-item opacity-75 grayscale" />
-                </li>
-              ))}
-              {[
-                "/client_logo_dark/airbnb.png",
-                "/client_logo_dark/envato.png",
-                "/client_logo_dark/slack.png",
-                "/client_logo_dark/zoom.png",
-              ].map((src, i) => (
-                <li key={`logo-row1-b-${i}`} className="flex items-center" aria-hidden="true">
-                  <img src={src} alt="" className="logo-item opacity-75 grayscale" />
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Row 2: scroll right */}
-          <div className="relative overflow-hidden bg-muted/20 rounded-2xl border border-border group">
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-            <ul className="marquee-track flex items-center gap-x-12 py-6 animate-logo-scroll-right group-hover:[animation-play-state:paused]">
-              {[
-                "/client_logo_dark/airbnb.png",
-                "/client_logo_dark/envato.png",
-                "/client_logo_dark/slack.png",
-                "/client_logo_dark/zoom.png",
-              ].map((src, i) => (
-                <li key={`logo-row2-a-${i}`} className="flex items-center">
-                  <img src={src} alt="Client logo" className="logo-item opacity-75 grayscale" />
-                </li>
-              ))}
-              {[
-                "/client_logo_dark/airbnb.png",
-                "/client_logo_dark/envato.png",
-                "/client_logo_dark/slack.png",
-                "/client_logo_dark/zoom.png",
-              ].map((src, i) => (
-                <li key={`logo-row2-b-${i}`} className="flex items-center" aria-hidden="true">
-                  <img src={src} alt="" className="logo-item opacity-75 grayscale" />
-                </li>
-              ))}
-            </ul>
-          </div>
         </section>
 
         {/* Stats Section */}
