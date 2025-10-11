@@ -1,10 +1,11 @@
 "use client"
 import { useMemo, useState } from "react"
 import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ArrowRight, CheckCircle, Database, Headphones, Layers, ShieldCheck, Globe } from "lucide-react"
+import { ArrowRight, CheckCircle, Database, Headphones, Layers, ShieldCheck, Globe, Search, Filter } from "lucide-react"
 
 type Dataset = {
   id: string
@@ -211,6 +212,7 @@ const DEVICES = [
 
 export default function AudioDatasetsPage() {
   const [allDatasets] = useState<Dataset[]>(() => makeDatasets(72))
+  const [query, setQuery] = useState("")
   const [activeIndustry, setActiveIndustry] = useState<string | null>(null)
   const [activeTypeToggle, setActiveTypeToggle] = useState<(typeof DATA_TYPES)[number]>("Audio Datasets")
   const [activeLanguage, setActiveLanguage] = useState<string | null>(null)
@@ -223,6 +225,7 @@ export default function AudioDatasetsPage() {
   const [activeDevice, setActiveDevice] = useState<string | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 12
+  const [showFilters, setShowFilters] = useState(false)
 
   const filtered = useMemo(() => {
     let list = allDatasets
@@ -236,9 +239,30 @@ export default function AudioDatasetsPage() {
     if (activeStyle) list = list.filter((d) => d.speechStyle === activeStyle)
     if (activeEnvironment) list = list.filter((d) => d.environment === activeEnvironment)
     if (activeDevice) list = list.filter((d) => d.device === activeDevice)
+    if (query.trim()) {
+      const q = query.toLowerCase()
+      list = list.filter((d) =>
+        [
+          d.title,
+          d.language,
+          d.industry,
+          d.application,
+          d.type,
+          d.region,
+          d.topic,
+          d.speechStyle,
+          d.environment,
+          d.device,
+        ]
+          .join(" ")
+          .toLowerCase()
+          .includes(q)
+      )
+    }
     return list
   }, [
     allDatasets,
+    query,
     activeIndustry,
     activeLanguage,
     activeApplication,
@@ -282,6 +306,42 @@ export default function AudioDatasetsPage() {
     </button>
   )
 
+  const FilterGroup = ({
+    label,
+    items,
+    activeValue,
+    onToggle,
+    limit = 12,
+  }: {
+    label: string
+    items: readonly string[]
+    activeValue: string | null
+    onToggle: (v: string | null) => void
+    limit?: number
+  }) => {
+    const [expanded, setExpanded] = useState(false)
+    const visible = expanded ? items : items.slice(0, limit)
+    return (
+      <div>
+        <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2">{label}</div>
+        <div className="flex flex-wrap gap-2 items-center">
+          {visible.map((i) => (
+            <Pill key={i} label={i} active={activeValue === i} onClick={() => onToggle(activeValue === i ? null : i)} />
+          ))}
+          {items.length > limit && (
+            <button
+              type="button"
+              onClick={() => setExpanded((v) => !v)}
+              className="text-xs underline text-muted-foreground"
+            >
+              {expanded ? "Show less" : "Show more"}
+            </button>
+          )}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="relative">
       {/* Page hero */}
@@ -302,98 +362,118 @@ export default function AudioDatasetsPage() {
         </div>
       </section>
 
-      {/* Filters */}
-      <section className="mt-8 md:mt-10 space-y-6">
-        {/* Industry */}
-        <div>
-          <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Industry</div>
-          <div className="flex flex-wrap gap-2">
-            {INDUSTRIES.map((i) => (
-              <Pill key={i} label={i} active={activeIndustry === i} onClick={() => setActiveIndustry(activeIndustry === i ? null : i)} />
-            ))}
+      {/* Search */}
+      <section className="mt-6">
+        <div className="flex items-center gap-2 max-w-xl">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value)
+                resetPagination()
+              }}
+              placeholder="Search datasets by name, language, region..."
+              className="pl-9"
+              aria-label="Search datasets"
+            />
           </div>
-        </div>
-
-        {/* Language */}
-        <div>
-          <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Language</div>
-          <div className="flex flex-wrap gap-2">
-            {LANGUAGES.map((l) => (
-              <Pill key={l} label={l} active={activeLanguage === l} onClick={() => setActiveLanguage(activeLanguage === l ? null : l)} />
-            ))}
-          </div>
-        </div>
-
-        {/* Application */}
-        <div>
-          <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Application / Use-Case</div>
-          <div className="flex flex-wrap gap-2">
-            {APPLICATIONS.map((a) => (
-              <Pill key={a} label={a} active={activeApplication === a} onClick={() => setActiveApplication(activeApplication === a ? null : a)} />
-            ))}
-          </div>
-        </div>
-
-        {/* Type */}
-        <div>
-          <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Type</div>
-          <div className="flex flex-wrap gap-2">
-            {TYPES.map((t) => (
-              <Pill key={t} label={t} active={activeType === t} onClick={() => setActiveType(activeType === t ? null : t)} />
-            ))}
-          </div>
-        </div>
-
-        {/* Region */}
-        <div>
-          <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Region / Geography</div>
-          <div className="flex flex-wrap gap-2">
-            {REGIONS.map((r) => (
-              <Pill key={r} label={r} active={activeRegion === r} onClick={() => setActiveRegion(activeRegion === r ? null : r)} />
-            ))}
-          </div>
-        </div>
-
-        {/* Topic */}
-        <div>
-          <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Topic</div>
-          <div className="flex flex-wrap gap-2">
-            {TOPICS.map((t) => (
-              <Pill key={t} label={t} active={activeTopic === t} onClick={() => setActiveTopic(activeTopic === t ? null : t)} />
-            ))}
-          </div>
-        </div>
-
-        {/* Speech Style */}
-        <div>
-          <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Speech Style</div>
-          <div className="flex flex-wrap gap-2">
-            {STYLES.map((s) => (
-              <Pill key={s} label={s} active={activeStyle === s} onClick={() => setActiveStyle(activeStyle === s ? null : s)} />
-            ))}
-          </div>
-        </div>
-
-        {/* Recording Environment */}
-        <div>
-          <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Recording Environment</div>
-          <div className="flex flex-wrap gap-2">
-            {ENVIRONMENTS.map((e) => (
-              <Pill key={e} label={e} active={activeEnvironment === e} onClick={() => setActiveEnvironment(activeEnvironment === e ? null : e)} />
-            ))}
-          </div>
-        </div>
-
-        {/* Recording Device */}
-        <div>
-          <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Recording Device</div>
-          <div className="flex flex-wrap gap-2">
-            {DEVICES.map((d) => (
-              <Pill key={d} label={d} active={activeDevice === d} onClick={() => setActiveDevice(activeDevice === d ? null : d)} />
-            ))}
-          </div>
+          <Button
+            variant="outline"
+            onClick={() => setShowFilters((v) => !v)}
+            aria-expanded={showFilters}
+            aria-controls="filters-section"
+            className="shrink-0"
+          >
+            <Filter className="h-4 w-4 mr-2" />
+            Filters
+          </Button>
         </div>
       </section>
+
+      {/* Filters */}
+      {showFilters && (
+      <section id="filters-section" className="mt-8 md:mt-10 space-y-6">
+        {/* Primary filters */}
+        <FilterGroup
+          label="Industry"
+          items={INDUSTRIES}
+          activeValue={activeIndustry}
+          onToggle={(v) => setActiveIndustry(v)}
+          limit={8}
+        />
+
+        <FilterGroup
+          label="Language"
+          items={LANGUAGES}
+          activeValue={activeLanguage}
+          onToggle={(v) => setActiveLanguage(v)}
+          limit={12}
+        />
+
+        <FilterGroup
+          label="Application / Use-Case"
+          items={APPLICATIONS}
+          activeValue={activeApplication}
+          onToggle={(v) => setActiveApplication(v)}
+          limit={8}
+        />
+
+        {/* Secondary filters collapsed by default */}
+        <details className="mt-2">
+          <summary className="cursor-pointer text-sm text-muted-foreground">More Filters</summary>
+          <div className="mt-4 space-y-6">
+            <FilterGroup
+              label="Type"
+              items={TYPES}
+              activeValue={activeType ?? null}
+              onToggle={(v) => setActiveType(v as (typeof TYPES)[number] | null)}
+              limit={6}
+            />
+
+            <FilterGroup
+              label="Region / Geography"
+              items={REGIONS}
+              activeValue={activeRegion}
+              onToggle={(v) => setActiveRegion(v)}
+              limit={10}
+            />
+
+            <FilterGroup
+              label="Topic"
+              items={TOPICS}
+              activeValue={activeTopic}
+              onToggle={(v) => setActiveTopic(v)}
+              limit={10}
+            />
+
+            <FilterGroup
+              label="Speech Style"
+              items={STYLES}
+              activeValue={activeStyle ?? null}
+              onToggle={(v) => setActiveStyle(v as (typeof STYLES)[number] | null)}
+              limit={6}
+            />
+
+            <FilterGroup
+              label="Recording Environment"
+              items={ENVIRONMENTS}
+              activeValue={activeEnvironment}
+              onToggle={(v) => setActiveEnvironment(v)}
+              limit={8}
+            />
+
+            <FilterGroup
+              label="Recording Device"
+              items={DEVICES}
+              activeValue={activeDevice}
+              onToggle={(v) => setActiveDevice(v)}
+              limit={8}
+            />
+          </div>
+        </details>
+      </section>
+      )}
 
       {/* Counts */}
       <section className="mt-6">
@@ -406,7 +486,7 @@ export default function AudioDatasetsPage() {
       <section className="mt-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pageItems.map((d) => (
-            <Card key={d.id} className="rounded-xl border border-border">
+            <Card key={d.id} className="rounded-xl border border-border h-full flex flex-col">
               <CardHeader className="pb-2">
                 <div className="flex items-start justify-between gap-3">
                   <CardTitle className="text-base md:text-lg font-semibold leading-tight">
@@ -417,7 +497,7 @@ export default function AudioDatasetsPage() {
                   </Link>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="flex-1 flex flex-col gap-3">
                 <div className="flex flex-wrap items-center gap-2">
                   {d.openSource && (
                     <Badge variant="secondary" className="rounded-full px-2 py-0.5 text-xs">Open-Source</Badge>
@@ -435,7 +515,7 @@ export default function AudioDatasetsPage() {
                   <div>Type: <span className="text-foreground">{d.type}</span></div>
                   <div>Region: <span className="text-foreground">{d.region}</span></div>
                 </div>
-                <audio src={d.audioPreview} controls className="w-full mt-2" />
+                <audio src={d.audioPreview} controls className="w-full mt-auto" />
               </CardContent>
             </Card>
           ))}
