@@ -268,7 +268,7 @@ export default async function LexDatasetDetailPage({
       {/* Footer CTA */}
       <footer className="border-t border-border/60 py-8 px-6 text-center">
         <p className="text-sm text-muted-foreground mb-4">
-          Can't find what you’re looking for?{" "}
+          Can&apos;t find what you&rsquo;re looking for?{" "}
           <Link href="/contact" className="underline hover:text-foreground">
             Contact us
           </Link>
