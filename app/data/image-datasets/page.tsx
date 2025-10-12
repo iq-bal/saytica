@@ -286,7 +286,7 @@ export default function ImageDatasetsPage() {
               <CardHeader className="pb-2">
                 <div className="flex items-start justify-between gap-3">
                   <CardTitle className="text-base md:text-lg font-semibold leading-tight">{d.title}</CardTitle>
-                  <Link href={`/datasets/image/${d.id}`} className="text-sm inline-flex items-center gap-1 hover:underline">
+                  <Link href={`/data/image-datasets/${d.id}`} className="text-sm inline-flex items-center gap-1 hover:underline">
                     View Detail <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
