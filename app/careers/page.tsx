@@ -4,7 +4,6 @@ import { Inter } from "next/font/google"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardAction } from "@/components/ui/card"
 import { ArrowUpRight, Clock, MapPin } from "lucide-react"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -21,21 +20,21 @@ const jobs: Job[] = [
   {
     id: "product-designer",
     title: "Product Designer",
-    description: "We're looking for a mid-level product designer to join our team.",
+    description: "We’re looking for a mid-level product designer to join our team.",
     category: "Design",
     link: "/careers/inhouse",
   },
   {
     id: "engineering-manager",
     title: "Engineering Manager",
-    description: "We're looking for an experienced engineering manager to join our team.",
+    description: "We’re looking for an experienced engineering manager to join our team.",
     category: "Development",
     link: "/careers/inhouse",
   },
   {
     id: "customer-success",
     title: "Customer Success Manager",
-    description: "We're looking for a customer success manager to join our team.",
+    description: "We’re looking for a customer success manager to join our team.",
     category: "Operations",
     link: "/careers/freelance",
   },
@@ -70,7 +69,7 @@ export default function CareersPage() {
       <section className="max-w-5xl pt-10 md:pt-14">
         {/* Badge */}
         <Badge variant="outline" className="rounded-full px-3 py-1 text-xs md:text-sm">
-          We're hiring!
+          We’re hiring!
         </Badge>
 
         {/* Heading */}
@@ -79,7 +78,7 @@ export default function CareersPage() {
         </h1>
         {/* Subtext */}
         <p className="mt-3 text-gray-600 leading-relaxed text-sm md:text-base lg:text-lg max-w-2xl">
-          We're looking for passionate people to join us on our mission. We value
+          We’re looking for passionate people to join us on our mission. We value
           flat hierarchies, clear communication, and full ownership and responsibility.
         </p>
 

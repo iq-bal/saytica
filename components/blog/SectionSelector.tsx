@@ -26,7 +26,7 @@ export default function SectionSelector({ content }: SectionSelectorProps) {
       const headingRegex = /^(#{1,3})\s+(.+)$/gm
       const matches = Array.from(content.matchAll(headingRegex))
       
-      const extractedSections: Section[] = matches.map((match, index) => {
+      const extractedSections: Section[] = matches.map((match) => {
         const level = match[1].length
         const title = match[2].trim()
         const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')

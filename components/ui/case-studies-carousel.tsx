@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback, forwardRef, useImperativeHandle } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Quote, ExternalLink, Target, Lightbulb } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
+import { Quote, ExternalLink, Target, Lightbulb } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -111,12 +110,10 @@ export const CaseStudiesCarousel: React.FC<CaseStudiesCarouselProps> = ({
   // Expose navigation functions to parent through callbacks
   useEffect(() => {
     if (onPrevious) {
-      // Store the function reference for parent to call
-      (window as any).carouselPrevious = goToPrev;
+      window.carouselPrevious = goToPrev;
     }
     if (onNext) {
-      // Store the function reference for parent to call  
-      (window as any).carouselNext = goToNext;
+      window.carouselNext = goToNext;
     }
   }, [goToPrev, goToNext, onPrevious, onNext]);
 
@@ -162,7 +159,7 @@ export const CaseStudiesCarousel: React.FC<CaseStudiesCarouselProps> = ({
             damping: 30,
           }}
         >
-          {caseStudies.map((caseStudy, index) => (
+          {caseStudies.map((caseStudy) => (
             <motion.div
               key={caseStudy.id}
               className="flex-shrink-0 w-[80%] mr-8 h-full"
@@ -185,7 +182,7 @@ export const CaseStudiesCarousel: React.FC<CaseStudiesCarouselProps> = ({
                       <Quote className="h-8 w-8 text-muted-foreground" />
                       
                       <blockquote className="text-lg text-foreground leading-relaxed">
-                        "{caseStudy.quote}"
+                        {caseStudy.quote}
                       </blockquote>
                     </div>
                     
@@ -266,3 +263,10 @@ export const CaseStudiesCarousel: React.FC<CaseStudiesCarouselProps> = ({
     </div>
   );
 };
+// Augment the Window interface to store carousel controls safely
+declare global {
+  interface Window {
+    carouselPrevious?: () => void;
+    carouselNext?: () => void;
+  }
+}

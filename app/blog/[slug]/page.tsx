@@ -3,7 +3,6 @@ import type { BlogPost } from "@/components/blog/types";
 import { dummyBlogs } from "@/components/blog/data";
 import BlogHeroSection from "@/components/blog/BlogHeroSection";
 import BlogContent from "@/components/blog/BlogContent";
-import BlogSidebarContent from "@/components/blog/BlogSidebarContent";
 import BlogMoreArticles from "@/components/blog/BlogMoreArticles";
 
 // Animations are handled inside client components to preserve behavior

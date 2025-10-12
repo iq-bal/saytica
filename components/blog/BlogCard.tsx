@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { ChevronRight, Calendar, Clock, Bookmark } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,7 +11,7 @@ import { BlogPost } from "./types";
 
 interface BlogCardProps {
   post: BlogPost;
-  variants?: any;
+  variants?: Variants;
 }
 
 export default function BlogCard({ post, variants }: BlogCardProps) {

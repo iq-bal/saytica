@@ -4,11 +4,12 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useTheme } from "@/lib/theme";
 import { TopLeftDecoration, TopRightDecoration } from "@/components/ui/corner-decoration";
 // Updated icons for translation/localization theme
 import { ArrowRight, Globe, Languages, FileText, Users, CheckCircle, Award } from "lucide-react";
+import Image from "next/image";
 
 /**
  * Modern hero section for localization/translation services (Andovar-style)
@@ -119,28 +120,36 @@ export default function Hero() {
                   Trusted by global enterprises
                 </p>
                 <div className="flex items-center justify-center lg:justify-start gap-6 opacity-70">
-                  <img 
-                    src={getLogoPath("slack.png")} 
-                    alt="Slack" 
-                    className="h-8 w-auto grayscale hover:grayscale hover:opacity-100 transition-all duration-200 filter contrast-125" 
+                  <Image
+                    src={getLogoPath("slack.png")}
+                    alt="Slack"
+                    width={100}
+                    height={32}
+                    className="h-8 w-auto grayscale hover:grayscale hover:opacity-100 transition-all duration-200 filter contrast-125"
                     title="Slack"
                   />
-                  <img 
-                    src={getLogoPath("zoom.png")} 
-                    alt="Zoom" 
-                    className="h-8 w-auto grayscale hover:grayscale hover:opacity-100 transition-all duration-200 filter contrast-125" 
+                  <Image
+                    src={getLogoPath("zoom.png")}
+                    alt="Zoom"
+                    width={100}
+                    height={32}
+                    className="h-8 w-auto grayscale hover:grayscale hover:opacity-100 transition-all duration-200 filter contrast-125"
                     title="Zoom"
                   />
-                  <img 
-                    src={getLogoPath("airbnb.png")} 
-                    alt="Airbnb" 
-                    className="h-8 w-auto grayscale hover:grayscale hover:opacity-100 transition-all duration-200 filter contrast-125" 
+                  <Image
+                    src={getLogoPath("airbnb.png")}
+                    alt="Airbnb"
+                    width={100}
+                    height={32}
+                    className="h-8 w-auto grayscale hover:grayscale hover:opacity-100 transition-all duration-200 filter contrast-125"
                     title="Airbnb"
                   />
-                  <img 
-                    src={getLogoPath("envato.png")} 
-                    alt="Envato" 
-                    className="h-8 w-auto grayscale hover:grayscale hover:opacity-100 transition-all duration-200 filter contrast-125" 
+                  <Image
+                    src={getLogoPath("envato.png")}
+                    alt="Envato"
+                    width={100}
+                    height={32}
+                    className="h-8 w-auto grayscale hover:grayscale hover:opacity-100 transition-all duration-200 filter contrast-125"
                     title="Envato"
                   />
                 </div>

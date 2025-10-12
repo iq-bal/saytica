@@ -45,16 +45,19 @@ const caseStudiesData: CaseStudy[] = [
 ];
 
 export default function CaseStudiesSection() {
+  type CarouselControlsWindow = Window & {
+    carouselPrevious?: () => void;
+    carouselNext?: () => void;
+  };
+
   const handlePrevious = () => {
-    if ((window as any).carouselPrevious) {
-      (window as any).carouselPrevious();
-    }
+    const w = window as CarouselControlsWindow;
+    w.carouselPrevious?.();
   };
 
   const handleNext = () => {
-    if ((window as any).carouselNext) {
-      (window as any).carouselNext();
-    }
+    const w = window as CarouselControlsWindow;
+    w.carouselNext?.();
   };
 
   return (

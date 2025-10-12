@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -150,11 +150,12 @@ export default function AboutPage() {
                   {/* Image */}
                   <div className="relative block w-full overflow-hidden rounded-2xl aspect-[4/3]">
                     {m.image ? (
-                      <img
+                      <Image
                         src={m.image}
                         alt={`${m.name} – ${m.role}`}
-                        className="h-full w-full object-cover"
-                        loading="lazy"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover"
                       />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center bg-muted">

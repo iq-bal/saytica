@@ -21,7 +21,6 @@ import {
 import { useTheme } from "@/lib/theme";
 import {
   Menu,
-  X,
   Sun,
   Moon,
   ChevronRight,
@@ -96,9 +95,7 @@ const MobileAccordion = ({
 
 export default function Navbar() {
   const { currentTheme, toggleTheme, mounted } = useTheme();
-  const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [focusedIndex, setFocusedIndex] = useState(-1);
   const navRef = useRef<HTMLElement>(null);
 
   // Keyboard navigation

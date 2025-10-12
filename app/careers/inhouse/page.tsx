@@ -20,21 +20,21 @@ const jobs: Job[] = [
   {
     id: "product-designer",
     title: "Product Designer",
-    description: "We're looking for a mid-level product designer to join our team.",
+    description: "We’re looking for a mid-level product designer to join our team.",
     category: "Design",
     link: "/careers/inhouse",
   },
   {
     id: "engineering-manager",
     title: "Engineering Manager",
-    description: "We're looking for an experienced engineering manager to join our team.",
+    description: "We’re looking for an experienced engineering manager to join our team.",
     category: "Development",
     link: "/careers/inhouse",
   },
   {
     id: "customer-success",
     title: "Customer Success Manager",
-    description: "We're looking for a customer success manager to join our team.",
+    description: "We’re looking for a customer success manager to join our team.",
     category: "Operations",
     link: "/careers/inhouse",
   },
@@ -65,10 +65,10 @@ export default function InhouseCareersPage() {
         <div className="absolute right-[-10%] top-10 h-72 w-72 rounded-full bg-gradient-to-br from-[#FFD1C1] to-[#FFE8E2] blur-3xl opacity-60" />
       </div>
       <section className="max-w-5xl pt-10 md:pt-14">
-        <Badge variant="outline" className="rounded-full px-3 py-1 text-xs md:text-sm">We're hiring!</Badge>
+        <Badge variant="outline" className="rounded-full px-3 py-1 text-xs md:text-sm">We’re hiring!</Badge>
         <h1 className="mt-4 text-5xl md:text-6xl font-bold tracking-tight">Be part of our mission</h1>
         <p className="mt-3 text-gray-600 leading-relaxed text-sm md:text-base lg:text-lg max-w-2xl">
-          We're looking for passionate people to join us on our mission. We value
+          We’re looking for passionate people to join us on our mission. We value
           flat hierarchies, clear communication, and full ownership and responsibility.
         </p>
 
