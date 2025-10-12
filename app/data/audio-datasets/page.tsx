@@ -492,7 +492,7 @@ export default function AudioDatasetsPage() {
                   <CardTitle className="text-base md:text-lg font-semibold leading-tight">
                     {d.title}
                   </CardTitle>
-                  <Link href={`/datasets/audio/${d.id}`} className="text-sm inline-flex items-center gap-1 hover:underline">
+                  <Link href={`/data/audio-datasets/${d.id}`} className="text-sm inline-flex items-center gap-1 hover:underline">
                     View Detail <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
