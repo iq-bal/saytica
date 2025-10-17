@@ -228,11 +228,6 @@ export default function SolutionPageTemplate({ data }: SolutionPageTemplateProps
                 <h3 className="text-xl font-semibold">{step.title}</h3>
                 <p className="text-muted-foreground">{step.description}</p>
               </div>
-              {index < data.process.length - 1 && (
-                <div className="hidden lg:block absolute top-8 left-full w-full">
-                  <ArrowRight className="h-6 w-6 text-muted-foreground mx-auto" />
-                </div>
-              )}
             </div>
           ))}
         </div>
