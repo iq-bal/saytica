@@ -1,8 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { notFound } from "next/navigation"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ArrowLeft, Calendar, User, CheckCircle } from "lucide-react"
 
 type Project = {
   title: string
@@ -92,60 +94,154 @@ const projects: Project[] = [
   },
 ]
 
-export default function WorkPage() {
+export default function ProjectDetailPage({ params }: { params: { slug: string } }) {
+  const project = projects.find(p => p.slug === params.slug)
+
+  if (!project) {
+    notFound()
+  }
+
   return (
     <div>
-      {/* Header aligned with global container from layout.tsx */}
-      <header className="mt-8 mb-10 text-center">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Our Work</h1>
-        <p className="mt-3 text-muted-foreground">Selected projects that reflect our approach and standards.</p>
+      {/* Back navigation */}
+      <div className="mb-8">
+        <Button asChild variant="ghost" className="pl-0">
+          <Link href="/work" className="flex items-center gap-2">
+            <ArrowLeft className="h-4 w-4" />
+            Back to Work
+          </Link>
+        </Button>
+      </div>
+
+      {/* Project header */}
+      <header className="mb-10">
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.tags.map((tag) => (
+            <Badge key={tag} variant="secondary" className="text-xs">
+              {tag}
+            </Badge>
+          ))}
+        </div>
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">{project.title}</h1>
+        <p className="text-lg text-muted-foreground mb-6">{project.summary}</p>
+        
+        {/* Project meta info */}
+        <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <User className="h-4 w-4" />
+            <span>{project.client}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Calendar className="h-4 w-4" />
+            <span>{project.duration}</span>
+          </div>
+        </div>
       </header>
 
-      {/* Projects grid */}
-      <section>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p, i) => (
-            <Card key={i} className="rounded-xl border bg-card hover:bg-muted/30 transition-colors">
-              <CardHeader>
-                <CardTitle className="text-lg md:text-xl leading-tight">{p.title}</CardTitle>
-                <CardDescription className="text-sm text-muted-foreground">{p.summary}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="relative aspect-[16/9] overflow-hidden rounded-lg border bg-muted">
-                  <Image src={p.image} alt={p.title} fill className="object-cover" />
+      {/* Hero image */}
+      <div className="relative aspect-[16/9] overflow-hidden rounded-xl border bg-muted mb-12">
+        <Image src={project.image} alt={project.title} fill className="object-cover" />
+      </div>
+
+      {/* Project content */}
+      <div className="grid gap-12 lg:grid-cols-3">
+        {/* Main content */}
+        <div className="lg:col-span-2 space-y-8">
+          {/* Overview */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-4">Project Overview</h2>
+            <p className="text-muted-foreground leading-relaxed">{project.description}</p>
+          </section>
+
+          {/* Challenge */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-4">The Challenge</h2>
+            <p className="text-muted-foreground leading-relaxed">{project.challenge}</p>
+          </section>
+
+          {/* Solution */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-4">Our Solution</h2>
+            <p className="text-muted-foreground leading-relaxed">{project.solution}</p>
+          </section>
+
+          {/* Results */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-4">Results & Impact</h2>
+            <div className="grid gap-3">
+              {project.results.map((result, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span className="text-muted-foreground">{result}</span>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {p.tags.map((t) => (
-                    <Badge key={t} variant="secondary" className="text-xs">
-                      {t}
+              ))}
+            </div>
+          </section>
+        </div>
+
+        {/* Sidebar */}
+        <div className="space-y-6">
+          {/* Technologies */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Technologies & Tools</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <Badge key={tech} variant="outline" className="text-xs">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Project details */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Project Details</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <h4 className="font-medium mb-1">Client</h4>
+                <p className="text-sm text-muted-foreground">{project.client}</p>
+              </div>
+              <div>
+                <h4 className="font-medium mb-1">Duration</h4>
+                <p className="text-sm text-muted-foreground">{project.duration}</p>
+              </div>
+              <div>
+                <h4 className="font-medium mb-1">Services</h4>
+                <div className="flex flex-wrap gap-1">
+                  {project.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary" className="text-xs">
+                      {tag}
                     </Badge>
                   ))}
                 </div>
-              </CardContent>
-              <CardFooter className="flex items-center justify-between">
-                <Button asChild variant="default">
-                  <Link href="/contact">Discuss a similar project</Link>
-                </Button>
-                <Button asChild variant="outline">
-                  <Link href={`/work/${p.slug}`}>View details</Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
-      </section>
+      </div>
 
-      {/* CTA band matching site philosophy */}
-      <section className="my-16">
+      {/* CTA section */}
+      <section className="mt-16">
         <div className="rounded-xl border p-6 md:p-8 bg-muted/40">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div>
-              <h2 className="text-xl md:text-2xl font-semibold">Have a project in mind?</h2>
-              <p className="mt-1 text-sm text-muted-foreground">We align to your domain, languages, and quality thresholds.</p>
+              <h2 className="text-xl md:text-2xl font-semibold">Interested in a similar project?</h2>
+              <p className="mt-1 text-sm text-muted-foreground">Let's discuss how we can help you achieve your localization goals.</p>
             </div>
-            <Button asChild>
-              <Link href="/contact">Contact Us</Link>
-            </Button>
+            <div className="flex gap-3">
+              <Button asChild variant="outline">
+                <Link href="/work">View More Work</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/contact">Start a Project</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
