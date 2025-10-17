@@ -10,6 +10,7 @@ import Image from "next/image";
 // TypeScript interfaces
 export interface CaseStudy {
   id: string;
+  slug: string;
   clientName: string;
   clientLogo: string;
   quote: string;
@@ -19,6 +20,15 @@ export interface CaseStudy {
   solution: string;
   result: string;
   caseStudyUrl: string;
+  description?: string;
+  technologies?: string[];
+  duration?: string;
+  industry?: string;
+  teamSize?: string;
+  metrics?: {
+    label: string;
+    value: string;
+  }[];
 }
 
 interface CaseStudiesCarouselProps {
@@ -237,7 +247,7 @@ export const CaseStudiesCarousel: React.FC<CaseStudiesCarouselProps> = ({
                       </div>
                       
                       <a
-                        href={caseStudy.caseStudyUrl}
+                        href={`/case-studies/${caseStudy.slug}`}
                         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                       >
                         Read case study

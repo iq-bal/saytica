@@ -8,6 +8,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const caseStudiesData: CaseStudy[] = [
   {
     id: "playforge",
+    slug: "playforge-games-localization",
     clientName: "PlayForge Games",
     clientLogo: "/case-studies/console.png",
     quote: "Localized UI and context-aware translations boosted retention in APAC markets significantly.",
@@ -17,21 +18,45 @@ const caseStudiesData: CaseStudy[] = [
     solution: "Advanced linguistic QA combined with in-context testing and cultural adaptation for each target market.",
     result: "+40% DAU",
     caseStudyUrl: "/case-studies/playforge-games",
+    description: "A comprehensive localization project for a leading gaming company expanding into APAC markets.",
+    technologies: ["Unity", "React", "Node.js", "MongoDB"],
+    duration: "6 months",
+    industry: "Gaming",
+    teamSize: "12 specialists",
+    metrics: [
+      { label: "Languages", value: "8" },
+      { label: "Markets", value: "12" },
+      { label: "Retention Increase", value: "40%" },
+      { label: "Revenue Growth", value: "65%" }
+    ]
   },
   {
     id: "globaledu",
-    clientName: "PlayForge Games",
-    clientLogo: "/case-studies/console.png",
-    quote: "Localized UI and context-aware translations boosted retention in APAC markets significantly.",
-    author: "David Chen",
-    role: "Head of Localization",
-    challenge: "Culturalization of complex UI elements and in-game dialogue for diverse APAC gaming audiences.",
-    solution: "Advanced linguistic QA combined with in-context testing and cultural adaptation for each target market.",
-    result: "+40% DAU",
-    caseStudyUrl: "/case-studies/playforge-games",
+    slug: "global-education-platform",
+    clientName: "EduGlobal Platform",
+    clientLogo: "/case-studies/education.png",
+    quote: "Our e-learning platform reached 2M+ students worldwide with culturally adapted content.",
+    author: "Maria Rodriguez",
+    role: "VP of International Expansion",
+    challenge: "Adapting educational content and assessments for diverse cultural and linguistic contexts across 20+ countries.",
+    solution: "Comprehensive educational localization with cultural adaptation, accessibility compliance, and pedagogical review.",
+    result: "2M+ students",
+    caseStudyUrl: "/case-studies/global-education-platform",
+    description: "Transforming online education through culturally sensitive localization and accessibility improvements.",
+    technologies: ["React", "Python", "AWS", "PostgreSQL"],
+    duration: "8 months",
+    industry: "Education",
+    teamSize: "18 specialists",
+    metrics: [
+      { label: "Languages", value: "25" },
+      { label: "Countries", value: "22" },
+      { label: "Students Reached", value: "2M+" },
+      { label: "Completion Rate", value: "85%" }
+    ]
   },
   {
     id: "techcorp",
+    slug: "techcorp-enterprise-software",
     clientName: "TechCorp Solutions",
     clientLogo: "/case-studies/technology.png",
     quote: "Our software documentation became accessible to global teams, accelerating our international product launches.",
@@ -41,6 +66,17 @@ const caseStudiesData: CaseStudy[] = [
     solution: "Specialized technical translation with terminology management and collaborative review processes.",
     result: "+65% faster launches",
     caseStudyUrl: "/case-studies/techcorp-solutions",
+    description: "Streamlining global software deployment through comprehensive technical documentation localization.",
+    technologies: ["Angular", "Java", "Spring Boot", "Oracle"],
+    duration: "4 months",
+    industry: "Enterprise Software",
+    teamSize: "8 specialists",
+    metrics: [
+      { label: "Languages", value: "15" },
+      { label: "Documentation Pages", value: "500+" },
+      { label: "Launch Speed", value: "65% faster" },
+      { label: "User Satisfaction", value: "92%" }
+    ]
   },
 ];
 
