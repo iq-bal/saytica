@@ -10,7 +10,9 @@ import {
   FileText, 
   LogOut,
   Menu,
-  X
+  X,
+  HelpCircle,
+  Mail
 } from "lucide-react";
 
 // Simple auth check - in production, replace with proper authentication
@@ -116,6 +118,16 @@ const AdminSidebar = ({
       name: "Blog Management",
       href: "/admin/blog",
       icon: FileText,
+    },
+    {
+      name: "FAQ Management",
+      href: "/admin/faqs",
+      icon: HelpCircle,
+    },
+    {
+      name: "Contact Management",
+      href: "/admin/contacts",
+      icon: Mail,
     },
   ];
 
