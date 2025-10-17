@@ -178,7 +178,7 @@ export default function SolutionPageTemplate({ data }: SolutionPageTemplateProps
         </div>
         
         {/* Spacer to allow last slide to be fully visible */}
-        <div className="h-screen"></div>
+        <div className="h-16"></div>
       </section>
 
       {/* Benefits Section */}
