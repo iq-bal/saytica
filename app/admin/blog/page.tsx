@@ -1,30 +1,31 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Link from "@tiptap/extension-link";
-import Image from "@tiptap/extension-image";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { useState } from 'react'
+import dynamic from 'next/dynamic'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
 import { 
   Plus, 
   Edit, 
   Trash2, 
-  Eye,
+  Save, 
+  X, 
+  Eye, 
   Calendar,
   User,
   Tag,
-  Bold,
-  Italic,
-  List,
-  ListOrdered,
-  Quote,
-  Undo,
-  Redo,
-  Link as LinkIcon,
-  ImageIcon
-} from "lucide-react";
+  Image as ImageIcon
+} from 'lucide-react'
+
+// Dynamically import the RichTextEditor to avoid SSR issues
+const RichTextEditor = dynamic(() => import('./RichTextEditor'), {
+  ssr: false,
+  loading: () => <div className="border rounded-lg p-4 min-h-[200px] bg-gray-50 animate-pulse">Loading editor...</div>
+})
 
 interface BlogPost {
   id: string;
@@ -88,137 +89,7 @@ const mockPosts: BlogPost[] = [
   }
 ];
 
-const RichTextEditor = ({ 
-  content, 
-  onChange 
-}: { 
-  content: string; 
-  onChange: (content: string) => void; 
-}) => {
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Link.configure({
-        openOnClick: false,
-      }),
-      Image,
-    ],
-    content,
-    onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
-    },
-  });
 
-  if (!editor) {
-    return null;
-  }
-
-  const addLink = () => {
-    const url = window.prompt("Enter URL:");
-    if (url) {
-      editor.chain().focus().setLink({ href: url }).run();
-    }
-  };
-
-  const addImage = () => {
-    const url = window.prompt("Enter image URL:");
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
-    }
-  };
-
-  return (
-    <div className="border border-gray-300 rounded-md">
-      {/* Toolbar */}
-      <div className="border-b border-gray-300 p-2 flex flex-wrap gap-1">
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          className={editor.isActive("bold") ? "bg-gray-200 dark:bg-gray-700" : ""}
-        >
-          <Bold className="h-4 w-4" />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={editor.isActive("italic") ? "bg-gray-200 dark:bg-gray-700" : ""}
-        >
-          <Italic className="h-4 w-4" />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={editor.isActive("bulletList") ? "bg-gray-200 dark:bg-gray-700" : ""}
-        >
-          <List className="h-4 w-4" />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={editor.isActive("orderedList") ? "bg-gray-200 dark:bg-gray-700" : ""}
-        >
-          <ListOrdered className="h-4 w-4" />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          className={editor.isActive("blockquote") ? "bg-gray-200 dark:bg-gray-700" : ""}
-        >
-          <Quote className="h-4 w-4" />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={addLink}
-        >
-          <LinkIcon className="h-4 w-4" />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={addImage}
-        >
-          <ImageIcon className="h-4 w-4" />
-        </Button>
-        <div className="border-l border-gray-300 mx-2" />
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().undo().run()}
-        >
-          <Undo className="h-4 w-4" />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => editor.chain().focus().redo().run()}
-        >
-          <Redo className="h-4 w-4" />
-        </Button>
-      </div>
-      
-      {/* Editor */}
-      <EditorContent 
-        editor={editor} 
-        className="prose prose-sm max-w-none p-4 min-h-[200px] focus:outline-none dark:prose-invert"
-      />
-    </div>
-  );
-};
 
 const BlogForm = ({ 
   post, 
