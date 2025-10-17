@@ -131,11 +131,11 @@ const AdminSidebar = ({
       
       {/* Sidebar */}
       <div className={`
-        fixed top-0 left-0 z-50 h-full w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out
+        fixed top-0 left-0 z-50 h-screen w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out flex flex-col
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-        lg:translate-x-0 lg:static lg:z-auto
+        lg:translate-x-0 lg:sticky lg:z-auto lg:flex-shrink-0
       `}>
-        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
           <h1 className="text-xl font-bold text-gray-900 dark:text-white">
             Admin Panel
           </h1>
@@ -149,7 +149,7 @@ const AdminSidebar = ({
           </Button>
         </div>
         
-        <nav className="p-4 space-y-2">
+        <nav className="p-4 space-y-2 flex-1 overflow-y-auto min-h-0">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
@@ -174,7 +174,7 @@ const AdminSidebar = ({
           })}
         </nav>
         
-        <div className="absolute bottom-4 left-4 right-4">
+        <div className="p-4 flex-shrink-0 border-t border-gray-200 dark:border-gray-700">
           <Button
             variant="outline"
             onClick={onLogout}
@@ -216,14 +216,14 @@ export default function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex">
       <AdminSidebar 
         isOpen={sidebarOpen} 
         onClose={() => setSidebarOpen(false)}
         onLogout={handleLogout}
       />
       
-      <div className="lg:ml-64">
+      <div className="flex-1 flex flex-col min-w-0">
         {/* Top bar */}
         <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-4 py-3">
           <div className="flex items-center justify-between">
@@ -248,7 +248,7 @@ export default function AdminLayout({
         </div>
         
         {/* Main content */}
-        <main className="p-6">
+        <main className="flex-1 p-6">
           {children}
         </main>
       </div>
