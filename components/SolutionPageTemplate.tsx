@@ -113,31 +113,72 @@ export default function SolutionPageTemplate({ data }: SolutionPageTemplateProps
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-16 lg:py-24">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            Key Features
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Discover the powerful capabilities that make our solution stand out
-          </p>
+      {/* Features Section - Sticky Full Page Slides */}
+      <section className="relative">
+        {/* Header */}
+        <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border/40 py-8">
+          <div className="text-center">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+              Key Features
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Discover the powerful capabilities that make our solution stand out
+            </p>
+          </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        {/* Sticky Feature Slides */}
+        <div className="relative">
           {data.features.map((feature, index) => (
-            <Card key={index} className="border-0 shadow-sm hover:shadow-md transition-shadow">
-              <CardHeader>
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  {feature.icon}
-                </div>
-                <CardTitle className="text-xl">{feature.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">{feature.description}</p>
-              </CardContent>
-            </Card>
+            <div 
+              key={index} 
+              className="sticky top-0 h-screen w-full flex items-center justify-center"
+              style={{ 
+                zIndex: 30 + index,
+                background: `linear-gradient(135deg, hsl(var(--primary) / ${0.05 + (index * 0.02)}), hsl(var(--secondary) / ${0.03 + (index * 0.02)}))`
+              }}
+            >
+              <div className="w-full px-4 lg:px-8">
+                <Card className="w-full max-w-7xl mx-auto border-0 shadow-2xl bg-background/95 backdrop-blur-sm">
+                  <CardContent className="p-8 lg:p-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                      <div className="space-y-6">
+                        <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center">
+                          {feature.icon}
+                        </div>
+                        <div className="space-y-4">
+                          <h3 className="text-3xl lg:text-4xl font-bold">
+                            {feature.title}
+                          </h3>
+                          <p className="text-lg text-muted-foreground leading-relaxed">
+                            {feature.description}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <span className="w-8 h-1 bg-primary rounded-full"></span>
+                          <span>Feature {index + 1} of {data.features.length}</span>
+                        </div>
+                      </div>
+                      <div className="relative">
+                        <div className="aspect-square bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl flex items-center justify-center">
+                          <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center">
+                            {feature.icon}
+                          </div>
+                        </div>
+                        {/* Decorative elements */}
+                        <div className="absolute -top-4 -right-4 w-8 h-8 bg-primary/20 rounded-full"></div>
+                        <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-secondary/20 rounded-full"></div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           ))}
         </div>
+        
+        {/* Spacer to allow last slide to be fully visible */}
+        <div className="h-screen"></div>
       </section>
 
       {/* Benefits Section */}
