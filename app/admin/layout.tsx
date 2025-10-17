@@ -12,7 +12,12 @@ import {
   Menu,
   X,
   HelpCircle,
-  Mail
+  Mail,
+  BarChart3,
+  Users,
+  Eye,
+  EyeOff,
+  MessageSquare
 } from "lucide-react";
 
 // Simple auth check - in production, replace with proper authentication
@@ -110,9 +115,19 @@ const AdminSidebar = ({
       icon: LayoutDashboard,
     },
     {
+      name: "Works Management",
+      href: "/admin/works",
+      icon: Briefcase,
+    },
+    {
+      name: "Testimonials",
+      href: "/admin/testimonials",
+      icon: MessageSquare,
+    },
+    {
       name: "Job Postings",
       href: "/admin/jobs",
-      icon: Briefcase,
+      icon: Users,
     },
     {
       name: "Blog Management",
