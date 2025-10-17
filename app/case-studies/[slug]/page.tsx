@@ -174,7 +174,7 @@ export default function CaseStudyDetailPage({ params }: PageProps) {
             <section>
               <div className="bg-muted/40 rounded-lg p-6">
                 <blockquote className="text-lg font-medium mb-4">
-                  "{caseStudy.quote}"
+                  &ldquo;{caseStudy.quote}&rdquo;
                 </blockquote>
                 <cite className="text-sm text-muted-foreground">
                   — {caseStudy.author}, {caseStudy.role}
@@ -259,7 +259,7 @@ export default function CaseStudyDetailPage({ params }: PageProps) {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
                 <h2 className="text-xl md:text-2xl font-semibold">Interested in a similar project?</h2>
-                <p className="mt-1 text-sm text-muted-foreground">Let's discuss how we can help you achieve your localization goals.</p>
+                <p className="mt-1 text-sm text-muted-foreground">Let&apos;s discuss how we can help you achieve your localization goals.</p>
               </div>
               <div className="flex gap-3">
                 <Button asChild variant="outline">

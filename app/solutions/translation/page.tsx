@@ -1,5 +1,5 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import { Globe, Users, Clock, Shield, Zap, Target, CheckCircle, TrendingUp, Languages } from "lucide-react";
+import { Globe, Users, Clock, Shield, Target, TrendingUp } from "lucide-react";
 
 const translationData = {
   title: "Translation & Localization",

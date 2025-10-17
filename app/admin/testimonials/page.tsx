@@ -464,7 +464,7 @@ export default function TestimonialsManagement() {
                       <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 mb-3">
                         <Quote className="h-5 w-5 text-gray-400 mb-2" />
                         <p className="text-gray-700 dark:text-gray-300 italic line-clamp-3">
-                          "{testimonial.quote}"
+                          &ldquo;{testimonial.quote}&rdquo;
                         </p>
                       </div>
                       

@@ -232,7 +232,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div>
               <h2 className="text-xl md:text-2xl font-semibold">Interested in a similar project?</h2>
-              <p className="mt-1 text-sm text-muted-foreground">Let's discuss how we can help you achieve your localization goals.</p>
+              <p className="mt-1 text-sm text-muted-foreground">Let&apos;s discuss how we can help you achieve your localization goals.</p>
             </div>
             <div className="flex gap-3">
               <Button asChild variant="outline">
