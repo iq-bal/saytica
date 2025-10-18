@@ -15,7 +15,11 @@ import {
   Eye,
   Download,
   Upload,
-  MoreHorizontal
+  MoreHorizontal,
+  CheckCircle,
+  TrendingUp,
+  ArrowUpRight,
+  BarChart3
 } from "lucide-react";
 
 type Dataset = {
@@ -222,60 +226,65 @@ export default function DataManagementPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Datasets</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">{datasets.length}</p>
-              </div>
-              <Database className="h-8 w-8 text-blue-600" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Datasets</CardTitle>
+            <Database className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{datasets.length}</div>
+            <div className="flex items-center text-xs text-muted-foreground mt-1">
+              <TrendingUp className="h-3 w-3 mr-1 text-green-500" />
+              +12% from last month
             </div>
           </CardContent>
         </Card>
+        
         <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active</p>
-                <p className="text-2xl font-bold text-green-600">
-                  {datasets.filter(d => d.status === "Active").length}
-                </p>
-              </div>
-              <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
-                <div className="h-3 w-3 rounded-full bg-green-600"></div>
-              </div>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Active</CardTitle>
+            <CheckCircle className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {datasets.filter(d => d.status === "Active").length}
+            </div>
+            <div className="flex items-center text-xs text-muted-foreground mt-1">
+              <ArrowUpRight className="h-3 w-3 mr-1 text-green-500" />
+              +18% from last week
             </div>
           </CardContent>
         </Card>
+        
         <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Draft</p>
-                <p className="text-2xl font-bold text-yellow-600">
-                  {datasets.filter(d => d.status === "Draft").length}
-                </p>
-              </div>
-              <div className="h-8 w-8 rounded-full bg-yellow-100 flex items-center justify-center">
-                <div className="h-3 w-3 rounded-full bg-yellow-600"></div>
-              </div>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Draft</CardTitle>
+            <Edit className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {datasets.filter(d => d.status === "Draft").length}
+            </div>
+            <div className="flex items-center text-xs text-muted-foreground mt-1">
+              <Edit className="h-3 w-3 mr-1 text-blue-500" />
+              {datasets.filter(d => d.status === "Draft").length} in progress
             </div>
           </CardContent>
         </Card>
+        
         <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Samples</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {datasets.reduce((sum, d) => sum + d.samples, 0).toLocaleString()}
-                </p>
-              </div>
-              <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
-                <div className="h-3 w-3 rounded-full bg-blue-600"></div>
-              </div>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Samples</CardTitle>
+            <BarChart3 className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {datasets.reduce((sum, d) => sum + d.samples, 0).toLocaleString()}
+            </div>
+            <div className="flex items-center text-xs text-muted-foreground mt-1">
+              <TrendingUp className="h-3 w-3 mr-1 text-green-500" />
+              High quality datasets
             </div>
           </CardContent>
         </Card>
