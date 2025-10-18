@@ -49,7 +49,7 @@ export default function BlogMoreArticles({ articles }: { articles: BlogPost[] })
                     </div>
                     <Link href={`/blog/${article.slug}`}>
                       <Image
-                        src={article.cover_image}
+                        src={article.cover_image || '/placeholder-blog.jpg'}
                         alt={article.title}
                         width={400}
                         height={220}

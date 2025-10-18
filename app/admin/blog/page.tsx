@@ -2,23 +2,18 @@
 
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
 import { 
   Plus, 
   Edit, 
   Trash2, 
-  Save, 
-  X, 
   Eye, 
   Calendar,
   User,
   Tag,
-  Image as ImageIcon,
   Upload
 } from 'lucide-react'
 import { blogService, BlogPostInput } from '@/lib/blog'
@@ -230,9 +225,11 @@ const BlogForm = ({
             />
             {formData.cover_image && (
               <div className="mt-2">
-                <img
+                <Image
                   src={formData.cover_image}
                   alt="Cover preview"
+                  width={128}
+                  height={80}
                   className="w-32 h-20 object-cover rounded border"
                 />
               </div>

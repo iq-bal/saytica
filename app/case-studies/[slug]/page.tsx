@@ -7,7 +7,7 @@ import { notFound } from "next/navigation"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowLeft, Calendar, User, CheckCircle, Target, Lightbulb, TrendingUp, Users, Building, ExternalLink } from "lucide-react"
+import { ArrowLeft, Calendar, User, CheckCircle } from "lucide-react"
 
 // Case Study interface
 interface CaseStudy {

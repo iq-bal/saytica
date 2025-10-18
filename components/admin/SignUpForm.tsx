@@ -77,8 +77,9 @@ export default function SignUpForm({ onSwitchToLogin }: SignUpFormProps) {
         setConfirmPassword("");
         setFullName("");
       }
-    } catch (err) {
-      setError("An unexpected error occurred. Please try again.");
+    } catch (error) {
+      console.error('Sign up error:', error)
+      setError('Failed to create account. Please try again.')
     } finally {
       setIsLoading(false);
     }

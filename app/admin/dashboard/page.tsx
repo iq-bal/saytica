@@ -16,13 +16,11 @@ import {
   Calendar,
   Filter,
   Search,
-  ArrowUpRight,
-  ArrowDownRight
+  ArrowUpRight
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 // Mock data for dashboard metrics
 const dashboardStats = {
@@ -59,7 +57,6 @@ const topDatasets = [
 
 export default function Dashboard() {
   const [timeRange, setTimeRange] = useState("7d");
-  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <div className="min-h-screen bg-background">

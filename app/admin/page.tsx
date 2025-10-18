@@ -28,7 +28,7 @@ export default function AdminPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
         <p className="text-muted-foreground">
-          Welcome back, {user.email}. Here's what's happening with your site.
+          Welcome back, {user.email}. Here&apos;s what&apos;s happening with your site.
         </p>
       </div>
 
@@ -99,7 +99,7 @@ export default function AdminPage() {
                     New blog post published
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    "The Future of AI in Language Processing" was published
+                    &quot;The Future of AI in Language Processing&quot; was published
                   </p>
                 </div>
                 <div className="ml-auto font-medium">2 hours ago</div>

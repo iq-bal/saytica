@@ -44,7 +44,7 @@ export default function ProtectedRoute({
             <AlertTriangle className="h-12 w-12 text-orange-500 mb-4" />
             <h2 className="text-xl font-semibold mb-2">Access Denied</h2>
             <p className="text-sm text-muted-foreground mb-4">
-              You don't have permission to access this admin area.
+              You don&apos;t have permission to access this admin area.
             </p>
             <p className="text-xs text-muted-foreground">
               Contact your administrator if you believe this is an error.

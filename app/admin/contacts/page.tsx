@@ -10,15 +10,12 @@ import {
   Search, 
   Filter, 
   Mail, 
-  Phone, 
   Calendar, 
   User, 
   MessageSquare, 
   Archive, 
   Trash2, 
-  Reply,
-  Eye,
-  EyeOff
+  Reply
 } from "lucide-react";
 
 type ContactStatus = "new" | "replied" | "archived";
@@ -48,7 +45,7 @@ export default function ContactManagementPage() {
       firstName: "John",
       lastName: "Doe",
       email: "john.doe@email.com",
-      message: "I'm interested in your data solutions for my e-commerce business. Could you provide more information about pricing and implementation?",
+      message: "I&apos;m interested in your data solutions for my e-commerce business. Could you provide more information about pricing and implementation?",
       status: "new",
       createdAt: "2024-01-15T10:30:00Z"
     },
@@ -61,7 +58,7 @@ export default function ContactManagementPage() {
       status: "replied",
       createdAt: "2024-01-14T14:20:00Z",
       repliedAt: "2024-01-14T16:45:00Z",
-      reply: "Thank you for your inquiry! I've sent you detailed information about our text processing services to your email."
+      reply: "Thank you for your inquiry! I&apos;ve sent you detailed information about our text processing services to your email."
     },
     {
       id: "3",

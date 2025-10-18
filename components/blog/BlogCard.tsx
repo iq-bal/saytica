@@ -24,7 +24,7 @@ export default function BlogCard({ post, variants }: BlogCardProps) {
           </div>
           <Link href={`/blog/${post.slug}`}>
             <Image
-              src={post.cover_image}
+              src={post.cover_image || '/placeholder-blog.jpg'}
               alt={post.title}
               width={400}
               height={220}
@@ -35,7 +35,7 @@ export default function BlogCard({ post, variants }: BlogCardProps) {
         <CardContent className="p-5 flex-1 flex flex-col">
           <div className="flex items-center text-xs text-muted-foreground space-x-4 mb-3">
             <span className="flex items-center">
-              <Calendar size={14} className="mr-1" /> {post.published_date.slice(0, 10)}
+              <Calendar size={14} className="mr-1" /> {post.published_date?.slice(0, 10) || 'No date'}
             </span>
             <span className="flex items-center">
               <Clock size={14} className="mr-1" /> {post.read_time}

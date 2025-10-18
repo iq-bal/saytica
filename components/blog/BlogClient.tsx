@@ -17,7 +17,7 @@ export default function BlogClient({ blogs }: BlogClientProps) {
 
   useEffect(() => {
     setFilteredBlogs(blogs);
-    const uniqueCategories = Array.from(new Set(blogs.map(blog => blog.category)));
+    const uniqueCategories = Array.from(new Set(blogs.map(blog => blog.category).filter((category): category is string => Boolean(category))));
     setCategories(uniqueCategories);
   }, [blogs]);
 

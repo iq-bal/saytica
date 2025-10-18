@@ -17,6 +17,20 @@ export interface BlogPostUpdate extends Partial<BlogPostInput> {
   id: string
 }
 
+interface SupabasePost {
+  id: string
+  title: string
+  slug: string
+  excerpt?: string
+  content?: string
+  author: string
+  published_at?: string
+  created_at: string
+  tags?: string[]
+  cover_image?: string
+  featured?: boolean
+}
+
 class BlogService {
   private supabaseClient = supabase
 
@@ -134,7 +148,7 @@ class BlogService {
     const { id, ...updateData } = postData
     
     // Set published_at if status is being changed to published
-    const updates: any = { ...updateData }
+    const updates: Partial<BlogPostInput> & { published_at?: string } = { ...updateData }
     if (updateData.status === 'published') {
       updates.published_at = new Date().toISOString()
     }
@@ -180,11 +194,11 @@ class BlogService {
   }
 
   // Transform database posts to BlogPost interface
-  private transformPosts(posts: any[]): BlogPost[] {
+  private transformPosts(posts: SupabasePost[]): BlogPost[] {
     return posts.map(post => this.transformPost(post))
   }
 
-  private transformPost(post: any): BlogPost {
+  private transformPost(post: SupabasePost): BlogPost {
     return {
       id: post.id,
       title: post.title,

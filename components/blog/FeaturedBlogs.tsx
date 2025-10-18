@@ -48,7 +48,7 @@ export default function FeaturedBlogs({ featuredBlogs }: FeaturedBlogsProps) {
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10"></div>
               <Image
-                src={post.cover_image}
+                src={post.cover_image || '/placeholder-blog.jpg'}
                 alt={post.title}
                 width={800}
                 height={idx === 0 ? 600 : 400}

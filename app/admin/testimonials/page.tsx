@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -10,13 +11,10 @@ import {
   Plus, 
   Edit, 
   Trash2, 
-  Eye,
   User,
   Quote,
-  Image as ImageIcon,
   Star,
   CheckCircle,
-  Archive,
   MessageSquare,
   TrendingUp,
   ArrowUpRight
@@ -423,9 +421,11 @@ export default function TestimonialsManagement() {
                   <div className="flex items-start space-x-4">
                     <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
                       {testimonial.src ? (
-                        <img 
+                        <Image 
                           src={testimonial.src} 
                           alt={testimonial.name}
+                          width={64}
+                          height={64}
                           className="w-full h-full object-cover"
                         />
                       ) : (

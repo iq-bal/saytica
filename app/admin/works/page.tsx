@@ -13,7 +13,6 @@ import {
   Eye,
   Calendar,
   User,
-  Tag,
   Image as ImageIcon,
   ExternalLink,
   CheckCircle,

@@ -108,7 +108,7 @@ const dataSolutionsData = [
     title: "Image Datasets",
     description: "Annotated image datasets for computer vision, object recognition, and visual AI applications with multilingual labeling.",
     href: "/data/image-datasets",
-    icon: <Image className="w-6 h-6" />,
+    icon: <Image className="w-6 h-6" aria-label="Image datasets icon" />,
     category: "Data Collections"
   },
   {

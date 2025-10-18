@@ -33,8 +33,9 @@ export default function LoginForm({ onSwitchToSignUp }: LoginFormProps) {
         setError(error.message);
       }
       // If successful, the auth context will handle the redirect
-    } catch (err) {
-      setError("An unexpected error occurred. Please try again.");
+    } catch (error) {
+      console.error('Login error:', error)
+      setError('Invalid email or password')
     } finally {
       setIsLoading(false);
     }
@@ -115,7 +116,7 @@ export default function LoginForm({ onSwitchToSignUp }: LoginFormProps) {
           {onSwitchToSignUp && (
             <div className="mt-6 text-center">
               <p className="text-sm text-muted-foreground">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Button
                   variant="link"
                   className="p-0 h-auto font-medium text-primary hover:underline"

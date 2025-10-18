@@ -8,35 +8,9 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 // Type definitions for common database operations
 export type Database = {
   public: {
-    Tables: {
-      // Add your table definitions here as you create them
-      // Example:
-      // users: {
-      //   Row: {
-      //     id: string
-      //     email: string
-      //     created_at: string
-      //   }
-      //   Insert: {
-      //     id?: string
-      //     email: string
-      //     created_at?: string
-      //   }
-      //   Update: {
-      //     id?: string
-      //     email?: string
-      //     created_at?: string
-      //   }
-      // }
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      [_ in never]: never
-    }
-    Enums: {
-      [_ in never]: never
-    }
+    Tables: Record<string, never>
+    Views: Record<string, never>
+    Functions: Record<string, never>
+    Enums: Record<string, never>
   }
 }

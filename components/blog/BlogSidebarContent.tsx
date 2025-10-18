@@ -28,7 +28,7 @@ export default function BlogSidebarContent({
                   <div className="flex gap-3 py-1">
                     <div className="flex-shrink-0 w-16 h-16 relative rounded-lg overflow-hidden">
                       <Image
-                        src={relatedPost.cover_image}
+                        src={relatedPost.cover_image || '/placeholder-blog.jpg'}
                         alt={relatedPost.title}
                         fill
                         className="object-cover"

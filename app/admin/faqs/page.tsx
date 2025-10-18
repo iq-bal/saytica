@@ -227,7 +227,7 @@ export default function FAQManagementPage() {
               <p className="text-gray-500 dark:text-gray-400">
                 {searchTerm || selectedCategory !== "All" 
                   ? "No FAQs match your search criteria." 
-                  : "No FAQs created yet. Click 'Add FAQ' to get started."
+                  : "No FAQs created yet. Click &apos;Add FAQ&apos; to get started."
                 }
               </p>
             </CardContent>

@@ -26,7 +26,6 @@ import {
   AlignRight,
   AlignJustify,
   Minus,
-  Type,
   Heading1,
   Heading2,
   Heading3
