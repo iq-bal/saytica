@@ -108,6 +108,19 @@ export const CaseStudiesCarousel: React.FC<CaseStudiesCarouselProps> = ({
   onPrevious,
   onNext,
 }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
   const {
     currentIndex,
     goToNext,
@@ -159,7 +172,7 @@ export const CaseStudiesCarousel: React.FC<CaseStudiesCarouselProps> = ({
       {/* Carousel Track */}
       <div className="overflow-hidden">
         <motion.div
-          className="flex items-stretch min-h-[400px]"
+          className="flex items-stretch min-h-[500px]"
           animate={{
             x: `calc(-${currentIndex * 80}% + ${currentIndex * 2}rem)`,
           }}
@@ -177,26 +190,26 @@ export const CaseStudiesCarousel: React.FC<CaseStudiesCarouselProps> = ({
               transition={{ duration: 0.2 }}
             >
               <Card
-                className="p-8 bg-card shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl h-full border-border"
+                className="p-8 bg-card shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl h-full border-border flex flex-col"
                 role="article"
                 aria-label={`Case study: ${caseStudy.clientName}`}
                 tabIndex={0}
               >
-                <div className="grid md:grid-cols-2 gap-8 h-full relative">
-                  {/* Vertical divider line */}
+                <div className="grid md:grid-cols-2 gap-8 flex-1 relative">
+                  {/* Vertical divider line - hidden on mobile */}
                   <div className="absolute left-1/2 top-4 bottom-4 w-px bg-border transform -translate-x-1/2 hidden md:block"></div>
                   
                   {/* Left Column - Quote */}
-                  <div className="space-y-6 flex flex-col justify-between pr-4">
-                    <div className="space-y-6">
+                  <div className="space-y-6 flex flex-col justify-between pr-4 min-h-[300px]">
+                    <div className="space-y-6 flex-1">
                       <Quote className="h-8 w-8 text-muted-foreground" />
                       
-                      <blockquote className="text-lg text-foreground leading-relaxed">
+                      <blockquote className="text-lg text-foreground leading-relaxed flex-1">
                         {caseStudy.quote}
                       </blockquote>
                     </div>
                     
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 mt-auto">
                       <div className="flex-1">
                         <div className="font-semibold text-foreground">
                           {caseStudy.author}
@@ -217,44 +230,63 @@ export const CaseStudiesCarousel: React.FC<CaseStudiesCarouselProps> = ({
                     </div>
                   </div>
 
-                  {/* Right Column - Case Snapshot */}
-                  <div className="space-y-6 flex flex-col justify-between pl-4">
-                    <div className="space-y-4">
-                      <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <Target className="h-4 w-4 text-muted-foreground" />
-                          <h4 className="font-semibold text-foreground">Challenge</h4>
+                  {/* Right Column - Case Snapshot - Conditionally rendered */}
+                  {!isMobile && (
+                    <div className="space-y-6 flex flex-col justify-between pl-4 min-h-[300px]">
+                      <div className="space-y-4 flex-1">
+                        <div>
+                          <div className="flex items-center gap-2 mb-2">
+                            <Target className="h-4 w-4 text-muted-foreground" />
+                            <h4 className="font-semibold text-foreground">Challenge</h4>
+                          </div>
+                          <p className="text-muted-foreground text-sm leading-relaxed">
+                            {caseStudy.challenge}
+                          </p>
                         </div>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                          {caseStudy.challenge}
-                        </p>
+                        
+                        <div>
+                          <div className="flex items-center gap-2 mb-2">
+                            <Lightbulb className="h-4 w-4 text-muted-foreground" />
+                            <h4 className="font-semibold text-foreground">Solution</h4>
+                          </div>
+                          <p className="text-muted-foreground text-sm leading-relaxed">
+                            {caseStudy.solution}
+                          </p>
+                        </div>
                       </div>
-                      
-                      <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <Lightbulb className="h-4 w-4 text-muted-foreground" />
-                          <h4 className="font-semibold text-foreground">Solution</h4>
+
+                      <div className="pt-4 border-t border-border mt-auto">
+                        <div className="text-4xl font-bold text-foreground mb-2">
+                          {caseStudy.result}
                         </div>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                          {caseStudy.solution}
-                        </p>
+                        
+                        <a
+                          href={`/case-studies/${caseStudy.slug}`}
+                          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          Read case study
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
                       </div>
                     </div>
+                  )}
 
-                    <div className="pt-4 border-t border-border">
-                      <div className="text-4xl font-bold text-foreground mb-2">
+                  {/* Mobile-only simplified content */}
+                  {isMobile && (
+                    <div className="mt-4 pt-4 border-t border-border min-h-[100px] flex flex-col justify-between">
+                      <div className="text-2xl font-bold text-foreground mb-2">
                         {caseStudy.result}
                       </div>
                       
                       <a
                         href={`/case-studies/${caseStudy.slug}`}
-                        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mt-auto"
                       >
                         Read case study
                         <ExternalLink className="h-3 w-3" />
                       </a>
                     </div>
-                  </div>
+                  )}
                 </div>
               </Card>
             </motion.div>
