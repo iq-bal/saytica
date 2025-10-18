@@ -23,20 +23,41 @@ export default function SectionSelector({ content }: SectionSelectorProps) {
   // Extract headings from content
   useEffect(() => {
     const extractSections = () => {
-      const headingRegex = /^(#{1,3})\s+(.+)$/gm
-      const matches = Array.from(content.matchAll(headingRegex))
+      let extractedSections: Section[] = []
       
-      const extractedSections: Section[] = matches.map((match) => {
-        const level = match[1].length
-        const title = match[2].trim()
-        const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+      // First try to extract Markdown headings
+      const markdownHeadingRegex = /^(#{1,3})\s+(.+)$/gm
+      const markdownMatches = Array.from(content.matchAll(markdownHeadingRegex))
+      
+      if (markdownMatches.length > 0) {
+        extractedSections = markdownMatches.map((match) => {
+          const level = match[1].length
+          const title = match[2].trim()
+          const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+          
+          return {
+            id,
+            title,
+            level
+          }
+        })
+      } else {
+        // If no Markdown headings found, try HTML headings
+        const htmlHeadingRegex = /<h([1-3])[^>]*>(.*?)<\/h[1-3]>/gi
+        const htmlMatches = Array.from(content.matchAll(htmlHeadingRegex))
         
-        return {
-          id,
-          title,
-          level
-        }
-      })
+        extractedSections = htmlMatches.map((match) => {
+          const level = parseInt(match[1])
+          const title = match[2].trim().replace(/<[^>]*>/g, '') // Remove any HTML tags from title
+          const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+          
+          return {
+            id,
+            title,
+            level
+          }
+        })
+      }
       
       setSections(extractedSections)
     }

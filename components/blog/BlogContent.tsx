@@ -158,53 +158,80 @@ export default function BlogContent({ post, relatedPosts }: { post: BlogPost; re
               `}</style>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: post.content
-                    .split("\n")
-                    .map((line, index, array) => {
-                      if (line.startsWith("# ")) {
-                        const title = line.substring(2);
-                        const id = title
-                          .toLowerCase()
-                          .replace(/[^a-z0-9]+/g, "-")
-                          .replace(/(^-|-$)/g, "");
-                        return `<h1 id="${id}">${title}</h1>`;
-                      } else if (line.startsWith("## ")) {
-                        const title = line.substring(3);
-                        const id = title
-                          .toLowerCase()
-                          .replace(/[^a-z0-9]+/g, "-")
-                          .replace(/(^-|-$)/g, "");
-                        return `<h2 id="${id}">${title}</h2>`;
-                      } else if (line.startsWith("### ")) {
-                        const title = line.substring(4);
-                        const id = title
-                          .toLowerCase()
-                          .replace(/[^a-z0-9]+/g, "-")
-                          .replace(/(^-|-$)/g, "");
-                        return `<h3 id="${id}">${title}</h3>`;
-                      } else if (line.startsWith("#### ")) {
-                        const title = line.substring(5);
-                        const id = title
-                          .toLowerCase()
-                          .replace(/[^a-z0-9]+/g, "-")
-                          .replace(/(^-|-$)/g, "");
-                        return `<h4 id="${id}">${title}</h4>`;
-                      } else if (line.startsWith("- ")) {
-                        return `<li>${line.substring(2)}</li>`;
-                      } else if (line.trim() === "") {
-                        // Check if the next line is also empty to create proper spacing
-                        const nextLine = array[index + 1];
-                        if (nextLine && nextLine.trim() === "") {
-                          return "<br><br>";
+                  __html: (() => {
+                    // Check if content is already HTML (contains HTML tags)
+                    const isHTML = /<[^>]+>/.test(post.content);
+                    
+                    if (isHTML) {
+                      // Content is already HTML, just add IDs to headings for TOC navigation
+                      return post.content.replace(
+                        /<h([1-6])([^>]*)>(.*?)<\/h[1-6]>/gi,
+                        (match, level, attributes, title) => {
+                          const cleanTitle = title.replace(/<[^>]*>/g, '').trim();
+                          const id = cleanTitle
+                            .toLowerCase()
+                            .replace(/[^a-z0-9]+/g, "-")
+                            .replace(/(^-|-$)/g, "");
+                          
+                          // Check if ID already exists in attributes
+                          if (attributes.includes('id=')) {
+                            return match; // Keep existing ID
+                          }
+                          
+                          return `<h${level}${attributes} id="${id}">${title}</h${level}>`;
                         }
-                        return "<br>";
-                      } else if (line.match(/^\d+\./)) {
-                        return `<li>${line.substring(line.indexOf(".") + 2)}</li>`;
-                      } else {
-                        return `<p>${line}</p>`;
-                      }
-                    })
-                    .join("")
+                      );
+                    } else {
+                      // Content is Markdown, process as before
+                      return post.content
+                        .split("\n")
+                        .map((line, index, array) => {
+                          if (line.startsWith("# ")) {
+                            const title = line.substring(2);
+                            const id = title
+                              .toLowerCase()
+                              .replace(/[^a-z0-9]+/g, "-")
+                              .replace(/(^-|-$)/g, "");
+                            return `<h1 id="${id}">${title}</h1>`;
+                          } else if (line.startsWith("## ")) {
+                            const title = line.substring(3);
+                            const id = title
+                              .toLowerCase()
+                              .replace(/[^a-z0-9]+/g, "-")
+                              .replace(/(^-|-$)/g, "");
+                            return `<h2 id="${id}">${title}</h2>`;
+                          } else if (line.startsWith("### ")) {
+                            const title = line.substring(4);
+                            const id = title
+                              .toLowerCase()
+                              .replace(/[^a-z0-9]+/g, "-")
+                              .replace(/(^-|-$)/g, "");
+                            return `<h3 id="${id}">${title}</h3>`;
+                          } else if (line.startsWith("#### ")) {
+                            const title = line.substring(5);
+                            const id = title
+                              .toLowerCase()
+                              .replace(/[^a-z0-9]+/g, "-")
+                              .replace(/(^-|-$)/g, "");
+                            return `<h4 id="${id}">${title}</h4>`;
+                          } else if (line.startsWith("- ")) {
+                            return `<li>${line.substring(2)}</li>`;
+                          } else if (line.trim() === "") {
+                            // Check if the next line is also empty to create proper spacing
+                            const nextLine = array[index + 1];
+                            if (nextLine && nextLine.trim() === "") {
+                              return "<br><br>";
+                            }
+                            return "<br>";
+                          } else if (line.match(/^\d+\./)) {
+                            return `<li>${line.substring(line.indexOf(".") + 2)}</li>`;
+                          } else {
+                            return `<p>${line}</p>`;
+                          }
+                        })
+                        .join("");
+                    }
+                  })()
                 }}
               />
             </div>
