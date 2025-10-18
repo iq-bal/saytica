@@ -18,7 +18,8 @@ import {
   Eye,
   EyeOff,
   MessageSquare,
-  Database
+  Database,
+  Globe
 } from "lucide-react";
 
 // Simple auth check - in production, replace with proper authentication
@@ -124,6 +125,11 @@ const AdminSidebar = ({
       name: "Works Management",
       href: "/admin/works",
       icon: Briefcase,
+    },
+    {
+      name: "Client Management",
+      href: "/admin/clients",
+      icon: Globe,
     },
     {
       name: "Testimonials",
