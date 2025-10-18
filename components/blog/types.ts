@@ -5,10 +5,15 @@ export interface BlogPost {
   excerpt: string;
   content: string;
   author: string;
-  published_date: string;
-  read_time: string;
-  category: string;
+  status?: 'draft' | 'published' | 'archived';
+  published_date?: string;
+  published_at?: string;
+  read_time?: string;
+  category?: string;
   tags: string[];
-  cover_image: string;
+  cover_image?: string;
   featured: boolean;
+  views?: number;
+  created_at?: string;
+  updated_at?: string;
 }

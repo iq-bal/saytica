@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { BlogPost } from "@/components/blog/types";
-import { dummyBlogs } from "@/components/blog/data";
+import { blogService } from "@/lib/blog";
 import BlogHeroSection from "@/components/blog/BlogHeroSection";
 import BlogContent from "@/components/blog/BlogContent";
 import BlogMoreArticles from "@/components/blog/BlogMoreArticles";
@@ -9,17 +9,18 @@ import BlogMoreArticles from "@/components/blog/BlogMoreArticles";
 
 interface PageProps { params: { slug: string } }
 
-export default function BlogPost({ params }: PageProps) {
-  const slug = params.slug;
+export default async function BlogPost({ params }: PageProps) {
+  const { slug } = await params;
 
-  const post = dummyBlogs.find((blog) => blog.slug === slug) || null;
+  const post = await blogService.getPostBySlug(slug);
   if (!post) {
     notFound();
   }
 
-  // More articles (excluding current post)
-  const moreArticles: BlogPost[] = dummyBlogs
-    .filter((blog) => blog.id !== post!.id)
+  // Get more published articles (excluding current post)
+  const allPosts = await blogService.getPublishedPosts();
+  const moreArticles: BlogPost[] = allPosts
+    .filter((blog) => blog.id !== post.id)
     .slice(0, 6);
 
   // Related posts: first 3 of moreArticles
@@ -28,10 +29,10 @@ export default function BlogPost({ params }: PageProps) {
   return (
     <div className="min-h-screen">
       {/* Hero section */}
-      <BlogHeroSection post={post!} />
+      <BlogHeroSection post={post} />
 
       {/* Main content + Sidebar in one grid */}
-      <BlogContent post={post!} relatedPosts={relatedPosts} />
+      <BlogContent post={post} relatedPosts={relatedPosts} />
 
       {/* More articles section */}
       <BlogMoreArticles articles={moreArticles} />
