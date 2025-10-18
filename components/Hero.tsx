@@ -10,6 +10,7 @@ import { TopLeftDecoration, TopRightDecoration } from "@/components/ui/corner-de
 // Updated icons for translation/localization theme
 import { ArrowRight, Globe, Languages, FileText, Users, CheckCircle, Award } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 /**
  * Modern hero section for localization/translation services (Andovar-style)
@@ -67,12 +68,16 @@ export default function Hero() {
 
             {/* CTA Buttons - Updated to use semantic button variants */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="px-8 py-4 text-lg font-semibold">
-                Get a Quote
-                <ArrowRight className="ml-2 h-5 w-5" />
+              <Button size="lg" asChild className="px-8 py-4 text-lg font-semibold">
+                <Link href="/contact">
+                  Get a Quote
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
               </Button>
-              <Button variant="outline" size="lg" className="px-8 py-4 text-lg font-semibold">
-                View Services
+              <Button variant="outline" size="lg" asChild className="px-8 py-4 text-lg font-semibold">
+                <Link href="/services">
+                  View Services
+                </Link>
               </Button>
             </div>
 
