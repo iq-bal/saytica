@@ -45,15 +45,17 @@ export default function BlogContent({ post, relatedPosts }: { post: BlogPost; re
             className="lg:col-span-8 space-y-10"
           >
             {/* Featured image */}
-            <div className="overflow-hidden rounded-xl">
-              <Image
-                src={post.cover_image}
-                alt={post.title}
-                width={1200}
-                height={600}
-                className="w-full object-cover"
-              />
-            </div>
+            {post.cover_image && (
+              <div className="overflow-hidden rounded-xl">
+                <Image
+                  src={post.cover_image}
+                  alt={post.title}
+                  width={1200}
+                  height={600}
+                  className="w-full object-cover"
+                />
+              </div>
+            )}
 
             {/* Social share buttons */}
             <div className="flex items-center justify-between py-4 border-y border-gray-200 dark:border-gray-700">
@@ -101,11 +103,64 @@ export default function BlogContent({ post, relatedPosts }: { post: BlogPost; re
 
             {/* Article content */}
             <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-primary prose-strong:text-foreground prose-ul:text-gray-700 dark:prose-ul:text-gray-300 prose-ol:text-gray-700 dark:prose-ol:text-gray-300">
+              <style jsx global>{`
+                .prose [style*="font-size"] {
+                  font-size: var(--font-size) !important;
+                }
+                .prose span[style*="font-size: 12px"] { font-size: 12px !important; }
+                .prose span[style*="font-size: 14px"] { font-size: 14px !important; }
+                .prose span[style*="font-size: 16px"] { font-size: 16px !important; }
+                .prose span[style*="font-size: 18px"] { font-size: 18px !important; }
+                .prose span[style*="font-size: 20px"] { font-size: 20px !important; }
+                .prose span[style*="font-size: 24px"] { font-size: 24px !important; }
+                .prose span[style*="font-size: 32px"] { font-size: 32px !important; }
+                .prose ul {
+                  list-style-type: disc !important;
+                  padding-left: 1.5rem !important;
+                }
+                .prose ol {
+                  list-style-type: decimal !important;
+                  padding-left: 1.5rem !important;
+                }
+                .prose li {
+                  display: list-item !important;
+                  margin-left: 0 !important;
+                }
+                .prose u {
+                  text-decoration: underline !important;
+                }
+                .prose s {
+                  text-decoration: line-through !important;
+                }
+                .prose .text-left { text-align: left !important; }
+                .prose .text-center { text-align: center !important; }
+                .prose .text-right { text-align: right !important; }
+                .prose .text-justify { text-align: justify !important; }
+                
+                /* Line spacing and break handling */
+                .prose br {
+                  display: block !important;
+                  margin: 0.75em 0 !important;
+                  content: "" !important;
+                  line-height: 1.5 !important;
+                }
+                .prose p {
+                  margin-bottom: 1em !important;
+                  line-height: 1.7 !important;
+                }
+                .prose p:last-child {
+                  margin-bottom: 0 !important;
+                }
+                /* Preserve whitespace and line breaks */
+                .prose {
+                  white-space: pre-wrap !important;
+                }
+              `}</style>
               <div
                 dangerouslySetInnerHTML={{
                   __html: post.content
                     .split("\n")
-                    .map((line) => {
+                    .map((line, index, array) => {
                       if (line.startsWith("# ")) {
                         const title = line.substring(2);
                         const id = title
@@ -137,6 +192,11 @@ export default function BlogContent({ post, relatedPosts }: { post: BlogPost; re
                       } else if (line.startsWith("- ")) {
                         return `<li>${line.substring(2)}</li>`;
                       } else if (line.trim() === "") {
+                        // Check if the next line is also empty to create proper spacing
+                        const nextLine = array[index + 1];
+                        if (nextLine && nextLine.trim() === "") {
+                          return "<br><br>";
+                        }
                         return "<br>";
                       } else if (line.match(/^\d+\./)) {
                         return `<li>${line.substring(line.indexOf(".") + 2)}</li>`;
