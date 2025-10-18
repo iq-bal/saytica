@@ -220,7 +220,7 @@ export default function ServicesPage() {
             Ready to Go Global?
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Let's discuss how our localization services and data solutions can help your business reach new markets and audiences worldwide.
+            Let&apos;s discuss how our localization services and data solutions can help your business reach new markets and audiences worldwide.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild className="px-8 py-4 text-lg font-semibold">

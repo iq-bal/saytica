@@ -1,5 +1,5 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import { Scale, Users, Clock, Shield, Zap, Target, CheckCircle, TrendingUp, FileText } from "lucide-react";
+import { Scale, Clock, Shield, Target, CheckCircle, FileText } from "lucide-react";
 
 const legalData = {
   title: "Legal Document Localization",

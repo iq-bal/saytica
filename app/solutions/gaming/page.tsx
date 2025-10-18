@@ -1,5 +1,5 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import { Gamepad2, Users, Clock, Shield, Zap, Target, CheckCircle, TrendingUp, Joystick } from "lucide-react";
+import { Gamepad2, Users, Clock, Shield, Zap, Target } from "lucide-react";
 
 const gamingData = {
   title: "Game Localization",

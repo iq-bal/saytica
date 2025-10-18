@@ -1,5 +1,5 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import { Code, Users, Clock, Shield, Zap, Target, CheckCircle, TrendingUp, Monitor } from "lucide-react";
+import { Code, Clock, Shield, Zap, Target, Monitor } from "lucide-react";
 
 const softwareData = {
   title: "Software Localization",

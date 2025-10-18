@@ -1,5 +1,5 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import { Heart, Users, Clock, Shield, Zap, Target, CheckCircle, TrendingUp, Stethoscope } from "lucide-react";
+import { Heart, Clock, Shield, Zap, Target, Stethoscope } from "lucide-react";
 
 const medicalData = {
   title: "Medical Localization",

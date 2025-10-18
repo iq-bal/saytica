@@ -15,7 +15,6 @@ import {
   Globe,
   Database,
   ExternalLink,
-  Calendar,
   Tag,
   CheckCircle,
   Clock,

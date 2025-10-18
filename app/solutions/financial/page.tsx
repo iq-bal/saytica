@@ -1,5 +1,5 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import { DollarSign, Users, Clock, Shield, Zap, Target, CheckCircle, TrendingUp, CreditCard } from "lucide-react";
+import { DollarSign, Clock, Shield, Target, TrendingUp, CreditCard } from "lucide-react";
 
 const financialData = {
   title: "Financial Services Localization",

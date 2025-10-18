@@ -1,5 +1,5 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import { GraduationCap, Users, Clock, Shield, Zap, Target, CheckCircle, TrendingUp, BookOpen } from "lucide-react";
+import { GraduationCap, Users, Clock, Shield, Zap, Target } from "lucide-react";
 
 const elearningData = {
   title: "eLearning Localization",

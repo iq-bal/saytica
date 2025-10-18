@@ -1,5 +1,5 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import { Megaphone, Users, Clock, Shield, Zap, Target, CheckCircle, TrendingUp, BarChart } from "lucide-react";
+import { Megaphone, Users, Clock, Shield, Target, BarChart } from "lucide-react";
 
 const marketingData = {
   title: "Marketing Localization",
